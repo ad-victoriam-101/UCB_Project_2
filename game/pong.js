@@ -257,8 +257,13 @@ Ball.prototype.update = function (playerBottom, playerTop) {
         if (topScored) {
             playerTop.score++;
         }
-
+        if (playerTop.score===10){
+            alert("game Over")
+            this.elementDestroyed()
+        }
+        else{
         this.reset();
+        }
     }
 
     // Determines how much to change the ball speed.
