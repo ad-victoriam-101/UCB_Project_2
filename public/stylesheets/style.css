@@ -10,3 +10,10 @@ body{
   background-image: url("../images/arcade\ machine.jpg");
   background-size: cover;
 }
+#bodyDiv{
+  margin-top: 100px;
+
+  /* background-color: black;
+  color:lightgreen;
+  opacity: 1; */
+}

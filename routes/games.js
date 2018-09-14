@@ -7,8 +7,8 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
   app.get("/game/:id", function(req, res) {
     // If the user already has an account send them to the members page
- 
+
   });
 
-  
+
 };
