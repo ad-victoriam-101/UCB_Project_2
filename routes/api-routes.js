@@ -50,5 +50,11 @@ module.exports = function(app) {
       });
     }
   });
+  app.get("/api/userdata/:id", function(req, res) {
+
+  })
+  app.get("/api/allscores", function(req, res){
+    
+  })
 
 };
