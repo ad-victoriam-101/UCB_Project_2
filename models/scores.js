@@ -1,8 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
-  var score = sequelize.define("score", {
+  var Score = sequelize.define("score", {
     // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
+    score: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    }
   });
-
-  return score;
+  Score.associate = function(models) {
+    // We're saying that a Post should belong to an Author
+    // A Post can't be created without an Author due to the foreign key constraint
+    Score.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+  return Score;
 };

@@ -1,10 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
-  var game = sequelize.define("game", {
+  var Game = sequelize.define("game", {
     // Giving the Author model a name of type STRING
-    name: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    }
   });
 
 
 
-  return game;
+
+  return Game;
 };
