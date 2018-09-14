@@ -1,169 +1,50 @@
-
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title></title>
-    
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    <script type="text/javascript" src="lib/browserevents.js"></script> 
-    
-    <script type="text/javascript" src="lib/layoutManager.js"></script> 
-    
-    <script type="text/javascript" src="lib/gameLoop.js"></script> 
-    
-    <script type="text/javascript" src="lib/maze/mazerenderer.js"></script>
-    
-    <script type="text/javascript" src="lib/maze/maze.js"></script>
-    
-    <script type="text/javascript" src="lib/gameplay/man.js"></script>
-    
-    <script type="text/javascript">
-    
-        //define render colours here
-    
-        var MAN_COLOUR = "red";
-        
-        var TRAIL_COLOUR = "blue";
-        
-        var GOAL_COLOUR = "orange";
-        
-        var BACKGROUND_COLOUR = "black";
-        
-        var WALL_COLOUR = "white";
-        
-        //add key controls for arrows/WASD
-        
-        $(document).on("keydown", function (e) 
-        {
-            if(e.which == 38 || e.which == 87)
-            {
-                moveMan('up');
-            }
-            if(e.which == 37 || e.which == 65)
-            {
-                moveMan('left');
-            }
-            
-            if(e.which == 39 || e.which == 68)
-            {
-                moveMan('right');
-            }
-            
-            if(e.which == 40 || e.which == 83)
-            {
-                moveMan('down');
-            }
-            
-        });
-    </script>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #662299;
-            overflow : hidden;
-        }
-        
-        #gameArea
-        {
-            width : 100%;
-            height : 100%;
-        }
-        
-        #gameCanvasContainer
-        {
-        }
-        
-        #gameCanvas
-        {
-            background-color : #FFFFFF;
-            width: 100%;
-            height: 100%;
-            
-            position : absolute;
-            
-            /*border : solid;*/
-        }
-        
-        #controlsPanelAfter
-        {
-            position : absolute;
-            bottom: 0;      
-            right: 0;
-            background-color : #662299;
-            /*opacity : 0.8;*/
-            
-            /*overflow : auto;*/
-        }
-        
-        #controlsPanelBefore
-        {
-            position : absolute;
-            bottom: 0;      
-            left: 0;
-            background-color : #662299;
-            /*opacity : 0.8;*/
-            
-            /*overflow : auto;*/
-        }
-        
-        .controlButton
-        {
-            margin : 0px;
-            float : left;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <title>Canvas Maze Game</title>
 
+
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
-    <body onload="pageLoaded()">
-        
-        
-        <div id="gameArea">
-            
-            <div id="controlsPanelBefore">
-            
-                
-            
-            </div>
-            
-            <canvas id="gameCanvas" width="800" height="800"></canvas>
-        
-            <div id="controlsPanelAfter">
-                <img id="button-up" src="img/up.png" class="controlButton" alt="Move Man Up" /> 
-                <img id="button-left" src="img/left.png" class="controlButton" alt="Move Man Left" /> 
-                
-                <img id="button-down" src="img/down.png" class="controlButton" alt="Move Man Down" /> 
-                <img id="button-right" src="img/right.png" class="controlButton" alt="Move Man Right" /> 
-                
-            </div>
+<body>
+<section>
+    <div id="wrapper" style="margin-left:auto; margin-right:auto;">
+        <h1 id="heading" style="background-color: #a59e9a; text-decoration-style: solid; color: #F8F8F8; width: 40%; margin-top: 0px; margin-bottom: 10px">Lost Path</h1>
+        <div id="maze">
+            <p style="text-align: center;margin-bottom: 10px">Find the way out of Maze in 30 seconds!</p>
+            <div id="c" style="margin-left:auto; margin-right:auto;margin-bottom: 10px;text-align: center;width: 10%;font-size: large"></div>
+
+            <canvas id="canvas" width="523" height="523" style="margin-left:auto; margin-right:auto">
+            This text is displayed if your browser does not support HTML5 Canvas.
+        </canvas>
+            <div id="timerel" style="margin-left:auto; margin-right:auto;margin-top:0px;text-align: center;width: 15%;font-size: large"></div>
+
         </div>
-        
-        <script type="text/javascript">
-        
-            //add button event listeners
-        
-            $("#button-up").click(function()
-            {
-                moveMan('up');
-            });
-            
-            $("#button-right").click(function()
-            {
-                moveMan('right');
-            });
-            
-            $("#button-down").click(function()
-            {
-                moveMan('down');
-            });
-            
-            $("#button-left").click(function()
-            {
-                moveMan('left');
-            });
-        </script>
- 
-    </body>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2 class="gamehead"></h2>
+                </div>
+                <div class="modal-footer">
+                    <h2 id="demo" onmouseover="" style="cursor:pointer;">Play Again?</h2>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--canvas id="c" width="2048" height="2048" style="margin-left:auto; margin-right:auto"></canvas-->
+
+
+
+</section>
+</body>
+<script src="main.js"></script>
 </html>
