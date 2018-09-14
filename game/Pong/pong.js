@@ -253,11 +253,13 @@ Ball.prototype.update = function (playerBottom, playerTop) {
 
         if (bottomScored) {
             playerBottom.score++;
+        
         }
         if (topScored) {
             playerTop.score++;
         }
         if (playerTop.score===10){
+            // ajax call goes here to update the score 
             alert("game Over")
             this.elementDestroyed()
         }
@@ -385,3 +387,4 @@ function Pong(appendToElementId, window, document) {
 
     return el;
 };
+
