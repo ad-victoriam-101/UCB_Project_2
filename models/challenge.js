@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  var challenge = sequelize.define("challenge", {
+  var Challenge = sequelize.define("Challenge", {
     // Giving the Author model a name of type INTEGER
     gameId: {
       type: DataTypes.INTEGER,
@@ -31,5 +31,5 @@ module.exports = function (sequelize, DataTypes) {
     }
 
   });
-  return challenge;
+  return Challenge;
 };

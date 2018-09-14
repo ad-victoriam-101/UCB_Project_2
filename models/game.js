@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Game = sequelize.define("game", {
+  var Game = sequelize.define("Game", {
     // Giving the Author model a name of type STRING
     title: {
       type: DataTypes.STRING,
@@ -9,9 +9,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
-
-
-
   return Game;
 };

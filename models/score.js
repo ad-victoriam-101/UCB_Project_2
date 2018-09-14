@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Score = sequelize.define("score", {
+  var Score = sequelize.define("Score", {
     // Giving the Author model a name of type STRING
     score: {
       type: DataTypes.INTEGER,
