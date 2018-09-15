@@ -77,8 +77,8 @@ function Paddle(x, y) {
 
   this.x = x;
   this.y = y;
-  this.x_speed = 1;
-  this.y_speed = 1;
+  this.x_speed = 0;
+  this.y_speed = 0;
 }
 /**
  * Render the paddle on the canvas.
@@ -99,10 +99,10 @@ Paddle.prototype.move = function (x, y) {
   this.y_speed = y;
   if (this.x < 0) {
     this.x = 0;
-    this.x_speed = 0;
+    this.x_speed = 1;
   } else if (this.x + this.width > WIDTH) {
     this.x = WIDTH - this.width;
-    this.x_speed = 0;
+    this.x_speed = 1;
   }
 };
 
