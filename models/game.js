@@ -9,5 +9,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+  Game.associate = function(models) {
+    // Associating User with scores
+    // When an user is deleted, also delete any associated Posts
+    Game.hasMany(models.Challenge, {
+      onDelete: "cascade"
+    });
+  };
   return Game;
 };
