@@ -77,8 +77,8 @@ function Paddle(x, y) {
 
   this.x = x;
   this.y = y;
-  this.x_speed = 0;
-  this.y_speed = 0;
+  this.x_speed = 1;
+  this.y_speed = 1;
 }
 /**
  * Render the paddle on the canvas.
