@@ -10,3 +10,6 @@ body{
   background-image: url("../images/arcade\ machine.jpg");
   background-size: cover;
 }
+#bodyDiv{
+  margin-top: 9%;
+}
