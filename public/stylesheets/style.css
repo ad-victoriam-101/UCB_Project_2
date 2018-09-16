@@ -12,8 +12,12 @@ body{
 }
 #bodyDiv{
   margin-top: 100px;
-
-  /* background-color: black;
-  color:lightgreen;
-  opacity: 1; */
 }
+/* 
+Code, make a div that contains all the game info and game divs, 
+-make sure div changes to image size and covers only the area that is white. 
+-when clicked games display in full screen? or larger div that looks arcade game ish. 
+-using wsScroll to multiply by, zoom into the arcade machine.
+-zooming out quits the game/restarts the HB server.
+-Bunch of junk
+ */
