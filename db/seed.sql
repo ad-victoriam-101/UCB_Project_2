@@ -1,16 +1,30 @@
+-- do not change the order of insertion as games and user must be populated first in order to populate challenges
+-- and scores.
 Use gamelife;
-INSERT INTO games (gameTitle) VALUES ("pong"),("maze"),("Snake"),("Bubble Shooter"),("Dragon ball Z");
+INSERT INTO games (gameTitle,createdAt,updatedAt) VALUES 
+("pong","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("maze","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("Snake","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("Bubble Shooter","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("Dragon ball Z","2018-09-15 23:30:23","2018-09-15 23:30:23");
 
-INSERT INTO challenges (gameId, challenger, ToBeChallenge) VALUES (1,1,2),(5,2,3),(3,3,1),(2,1,2),(1,2,1);
+Insert into users (email,password,createdAt,updatedAt) VALUES
+("Amica@berkeley.edu","$2a$10$J84GphQYgdvQ3lJEZaPPXenbvr9z./9GSxA4EAfCs4z5szgqTpit.","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("David@berkeley.edu","$2a$10$37OHeWr3onhHOkn9vTPJBewDR22ZGX9ESCYWQckKjgQMMGp90PZim","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("Chris@berkeley.edu","$2a$10$9PZ1B1Jg.rBsaQa2Wrsf.untcbH3jBxWUl73QaukvYga4db5dSb0a","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("Brogan@berkeley.edu","$2a$10$jK/3ZXoPtnNvnS7HGnUvpO2YQCKFiCrH1sllTziDV8uN6HVDGdCPG","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("isaac@berkeley.edu","$2a$10$XWfxoGfYFakNy9LttmjJUu157m.yXLOEtsWjpI18ieZIoNCARjXOW","2018-09-15 23:30:23","2018-09-15 23:30:23");
 
-INSERT INTO scores (gameScore, userId, gameId) VALUES (10,2,1),(2,1,2),(5,3,3),(6,1,4),(8,1,5);
+INSERT INTO challenges (gameId, challengerId, ToBeChallengeId,createdAt,updatedAt,post) 
+VALUES (1,1,2,"2018-09-15 23:30:23","2018-09-15 23:30:23","What up dude?!"),
+(5,2,3,"2018-09-15 23:30:23","2018-09-15 23:30:23","You can beat me."),
+(3,3,1,"2018-09-15 23:30:23","2018-09-15 23:30:23","You are trash."),
+(2,1,2,"2018-09-15 23:30:23","2018-09-15 23:30:23","Are you even trying."),
+(1,2,1,"2018-09-15 23:30:23","2018-09-15 23:30:23","Your game skills are trash.");
 
-Insert into User (email,password,createdAt,updatedAt) VALUES
-(Amica@berkeley.edu,$2a$10$J84GphQYgdvQ3lJEZaPPXenbvr9z./9GSxA4EAfCs4z5szgqTpit.,"2018-09-15 23:30:23","2018-09-15 23:30:23"),
-(David@berkeley.edu,$2a$10$37OHeWr3onhHOkn9vTPJBewDR22ZGX9ESCYWQckKjgQMMGp90PZim,"2018-09-15 23:30:36","2018-09-15 23:30:36"),
-(Chris@berkeley.edu,$2a$10$9PZ1B1Jg.rBsaQa2Wrsf.untcbH3jBxWUl73QaukvYga4db5dSb0a,"2018-09-15 23:30:45","2018-09-15 23:30:45"),
-(Brogan@berkeley.edu,$2a$10$jK/3ZXoPtnNvnS7HGnUvpO2YQCKFiCrH1sllTziDV8uN6HVDGdCPG,"2018-09-15 23:30:55","2018-09-15 23:30:55"),
-(isaac@berkeley.edu,$2a$10$XWfxoGfYFakNy9LttmjJUu157m.yXLOEtsWjpI18ieZIoNCARjXOW,"2018-09-16T07:08:20.000Z","2018-09-16T07:08:20.000Z")
-
-
-
+INSERT INTO scores (gameScore, userId, gameId,createdAt,updatedAt) 
+VALUES (10,2,1,"2018-09-15 23:30:23","2018-09-15 23:30:23"),
+(2,1,2,"2018-09-15 23:30:23","2018-09-15 23:30:23"),
+(5,3,3,"2018-09-15 23:30:23","2018-09-15 23:30:23"),
+(6,1,4,"2018-09-15 23:30:23","2018-09-15 23:30:23"),
+(8,1,5,"2018-09-15 23:30:23","2018-09-15 23:30:23");
