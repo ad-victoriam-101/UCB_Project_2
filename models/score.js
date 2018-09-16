@@ -13,14 +13,14 @@ module.exports = function(sequelize, DataTypes) {
   Score.associate = function(models) {
     Score.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: false,
       }
     });
   };
   Score.associate = function(models) {
     Score.belongsTo(models.Game, {
       foreignKey: {
-        allowNull: false
+        allowNull: false,
       }
     });
   };
