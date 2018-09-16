@@ -12,20 +12,20 @@ module.exports = function(sequelize, DataTypes) {
   Challenge.associate = function(models) {
     Challenge.belongsTo(models.Game, {
       foreignKey: {
-        allowNull: false
+        allowNull: false,
       }
     });
   };
   Challenge.associate = function(models) {
     Challenge.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: false,
       },
       as:"challenger"
     });
     Challenge.belongsTo(models.User,{
       foreignKey:{
-        allowNull: false
+        allowNull: false,
       },
       as: "ToBeChallenge"
     });
