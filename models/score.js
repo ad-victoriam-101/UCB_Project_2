@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Score = sequelize.define("Score", {
     // Giving the Author model a name of type STRING
-    game_score: {
+    gameScore: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  
+
   Score.associate = function(models) {
     Score.belongsTo(models.User, {
       foreignKey: {

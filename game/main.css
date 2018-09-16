@@ -1,13 +1,27 @@
 body{background-color: black}
 text{text-decoration-color: green;color: green}
-game{background-color: black}
+
 #canvas { background: black; display: block; margin: 0 auto; }
+
+
 h1{color:green}
 h2{color:green}
-a{ padding: 10px;color: green}
+a{padding:10px;color: green}
 p{color:green;text-align: center}
 h3{color:green}
 h4{color:green}
 h5{color:green}
 h6{color:green}
 .container{align-content: center}
+/* game div area */
+.games{padding-left:40%;padding-top:10%}
+/* game indivudal game buttons */
+.game{background: rgb(49, 49, 49);padding:4%}
+
+.chosen{background: green; color:black}
+
+text{color:green}
+
+.space{padding:15px;}
+
+.center{margin-left:45%}
