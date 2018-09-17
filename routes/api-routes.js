@@ -50,6 +50,7 @@ module.exports = function(app) {
       });
     }
   });
+  //Gets curretn User
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
@@ -63,6 +64,7 @@ module.exports = function(app) {
       });
     }
   });
+  //gets the Top scores for givin id
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -76,6 +78,7 @@ module.exports = function(app) {
       res.json(dbScores);
     });
   });
+  // users score &&& game title
   app.get("/api/userdata/:userId", function(req, res){
     db.Score.findAll(
       {
