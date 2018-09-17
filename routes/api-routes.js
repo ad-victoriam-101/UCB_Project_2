@@ -50,15 +50,57 @@ module.exports = function(app) {
       });
     }
   });
-  // app.get("/game/:id", function(req, res) {
+  app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
+  });
+  app.get("/api/leaderboard", function(req, res){
+    db.Score.max("gameScore", {
+      group:"gameId"
+    }).then(function(data){
+      db.Score.findAll({
+        where:{
+          gameScore:{
+            // data is not an array why?
+            in:[data]
+          },
+        },
+        // need to add user to this join
+        include:[db.Game]
+      }).then(function(dbScore){
+        res.json(dbScore);
+      });
+    });
+  });
+  app.get("/api/userdata/:id", function(req, res){
+    db.Score.findAll(
+      {
+        where:{
+          userId: req.params.id
+        },
+        include:[db.Game],
+        order:[["gameId", "ASC"]]
+      }
+    ).then(function(dbScore){
+      var newArrayofScores =[];
+      dbScore.forEach(function(item){
+        var newObject ={
+          gameTitle: item.Game.gameTitle,
+          gameScore: item.gameScore
+        };
+        newArrayofScores.push(newObject);
+      });
+      res.json(newArrayofScores);
+    });
 
-
-  // });
-  // app.get("/api/userdata/:id", function(req, res) {
-
-  // });
-  // app.get("/api/allscores", function(req, res){
-
-  // });
-
+  });
 };
