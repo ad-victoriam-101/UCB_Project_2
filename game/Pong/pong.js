@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 /**
  * Settings
@@ -12,7 +12,8 @@ var LEFTARROW = 37;
 var RIGHTARROW = 39;
 var OFFWHITE = "#f9fafc";
 var BLUE = "#3b79b4";
-
+var GREEN =	"#008000";
+var BLACK = "#000000";
 /**
  * Draws a rounded rectangle using the current state of the canvas.
  * If you omit the last three params, it will draw a rectangle
@@ -328,9 +329,10 @@ function Pong(appendToElementId, window, document) {
   canvas.height = HEIGHT;
   canvas.style.borderRadius = "5px";
   canvas.style.border = "2px solid " + OFFWHITE;
+  canvas.style.backgroundColor = BLACK;
 
   var context = canvas.getContext("2d");
-  context.fillStyle = BLUE;
+  context.fillStyle = GREEN;
   context.font = "12px sans-serif";
 
   var player = new Player();
@@ -342,9 +344,9 @@ function Pong(appendToElementId, window, document) {
 
 
   function render() {
-    context.fillStyle = OFFWHITE;
+    context.fillStyle = BLACK;
     context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = BLUE;
+    context.fillStyle = GREEN;
 
     player.render(context);
     computer.render(context);

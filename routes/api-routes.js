@@ -63,6 +63,7 @@ module.exports = function(app) {
       res.json(dbScores);
     });
   });
+  // users score &&& game title
   app.get("/api/userdata/:userId", function(req, res){
     db.Score.findAll(
       {
