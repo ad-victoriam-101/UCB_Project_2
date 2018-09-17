@@ -7,6 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue : true
     }
   });
   Challenge.associate = function(models) {
@@ -15,8 +19,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
       }
     });
-  };
-  Challenge.associate = function(models) {
     Challenge.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
