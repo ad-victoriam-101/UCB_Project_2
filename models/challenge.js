@@ -15,8 +15,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
       }
     });
-  };
-  Challenge.associate = function(models) {
     Challenge.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
