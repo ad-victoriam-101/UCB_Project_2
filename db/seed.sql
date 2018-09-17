@@ -1,6 +1,7 @@
 -- do not change the order of insertion as games and user must be populated first in order to populate challenges
 -- and scores.
-Use gamelife;
+USE gamelife;
+
 INSERT INTO games (gameTitle,createdAt,updatedAt) VALUES 
 ("pong","2018-09-15 23:30:23","2018-09-15 23:30:23"),
 ("maze","2018-09-15 23:30:23","2018-09-15 23:30:23"),
