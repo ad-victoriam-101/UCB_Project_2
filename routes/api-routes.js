@@ -50,21 +50,6 @@ module.exports = function(app) {
       });
     }
   });
-  //Gets curretn User
-  app.get("/api/user_data", function(req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-  });
-  //gets the Top scores for givin id
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -99,6 +84,23 @@ module.exports = function(app) {
       });
       res.json(newArrayofScores);
     });
-
+  });
+  app.post("/api/newscore/:id", function(req,res){
+    console.log(res);
+    console.log(req);
+  });
+  app.post("/api/newChallenge/",function(req, res){
+    var challenger = req.body.challengerId;
+    var toBeChallenge = req.body.ToBeChallengeId;
+    var post = req.body.post;
+    var gameId = req.body.gameId;
+    db.Challenge.create({
+      post: post,
+      challengerId: challenger,
+      ToBeChallengeId: toBeChallenge,
+      gameId: gameId
+    }).then(function(dbChallege){
+      res.json(dbChallege);
+    });
   });
 };
