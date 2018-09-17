@@ -63,15 +63,15 @@ module.exports = function(app) {
       });
     }
   });
-  app.get("/api/leaderboard/:gameId", function(req, res){
+  app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
-      attributes:["gamescore", "User.email"],
+      limit:5,
+      attributes:["gamescore"],
       where:{
         gameId:gameId
       },
-      order:[["gameScore", "DESC"]],
-      include:[db.User, db.Game]
+      order:[["gameScore", "DESC"]]
     }).then(function(dbScores){
       res.json(dbScores);
     });
