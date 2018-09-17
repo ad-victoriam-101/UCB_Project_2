@@ -1,6 +1,7 @@
 form.signup,
 form.login {
   margin-top: 50px;
+  box-shadow: 10px;
 }
 .navbar{
   background-color: gray;
