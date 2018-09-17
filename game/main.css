@@ -15,9 +15,9 @@ h3{color:green;font-family: 'VT323', monospace;}
 h4{color:green;font-family: 'VT323', monospace;}
 h5{color:green;font-family: 'VT323', monospace;}
 h6{color:green;font-family: 'VT323', monospace;}
-.container{align-content: center}
+.container{align-content: center; overflow: auto; max-height: 10%;}
 /* game div area */
-.games{padding-left:40%;padding-top:10%}
+.games{padding-left:40%;padding-top:10%;}
 /* game indivudal game buttons */
 .game{background: rgb(49, 49, 49);padding:15%;font-family: 'VT323', monospace;}
 
