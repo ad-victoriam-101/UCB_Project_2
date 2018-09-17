@@ -2,6 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -50,15 +51,38 @@ module.exports = function(app) {
       });
     }
   });
-  // app.get("/game/:id", function(req, res) {
+  app.get("/api/leaderboard", function(req, res){
+    db.Score.findAll(
+      {
+        attributes:["gameScore", "userId"]
+      }
+    ).then(function(dbScore){
+      res.json(dbScore);
+    });
+  });
+  app.get("/api/userdata/:id", function(req, res){
+    db.Score.findAll(
+      {
+        attributes:["gameScore"],
+        where:{
+          userId: req.params.id
+        },
+        include:[db.Game],
+        order:[["gameId", "ASC"]]
+      }
+    ).then(function(dbScore){
+      // var newArrayofScores =[];
+      // dbScore.forEach(function(item){
+      //   var newObject ={
+      //     gameTitle: item.Game.gameTitle,
+      //     gameScore: item.gameScore
+      //   };
+      //   newArrayofScores.push(newObject);
+      // });
+      res.json(dbScore);
+    });
 
+  });
 
-  // });
-  // app.get("/api/userdata/:id", function(req, res) {
-
-  // });
-  // app.get("/api/allscores", function(req, res){
-
-  // });
 
 };
