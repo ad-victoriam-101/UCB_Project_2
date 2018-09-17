@@ -70,9 +70,12 @@ module.exports = function(app) {
       db.Score.findAll({
         where:{
           gameScore:{
+            // data is not an array why?
             in:[data]
-          }
-        }
+          },
+        },
+        // need to add user to this join
+        include:[db.Game]
       }).then(function(dbScore){
         res.json(dbScore);
       });
