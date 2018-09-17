@@ -63,29 +63,24 @@ module.exports = function(app) {
       });
     }
   });
-  app.get("/api/leaderboard", function(req, res){
-    db.Score.max("gameScore", {
-      group:"gameId"
-    }).then(function(data){
-      db.Score.findAll({
-        where:{
-          gameScore:{
-            // data is not an array why?
-            in:[data]
-          },
-        },
-        // need to add user to this join
-        include:[db.Game]
-      }).then(function(dbScore){
-        res.json(dbScore);
-      });
+  app.get("/api/leaderboard/:gameId", function(req, res){
+    var gameId = req.params.gameId;
+    db.Score.findAll({
+      attributes:["gamescore", "User.email"],
+      where:{
+        gameId:gameId
+      },
+      order:[["gameScore", "DESC"]],
+      include:[db.User, db.Game]
+    }).then(function(dbScores){
+      res.json(dbScores);
     });
   });
-  app.get("/api/userdata/:id", function(req, res){
+  app.get("/api/userdata/:userId", function(req, res){
     db.Score.findAll(
       {
         where:{
-          userId: req.params.id
+          userId: req.params.userId
         },
         include:[db.Game],
         order:[["gameId", "ASC"]]
