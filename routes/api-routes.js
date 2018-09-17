@@ -85,8 +85,13 @@ module.exports = function(app) {
     });
   });
   app.post("/api/newscore/:id", function(req,res){
-    console.log(res);
-    console.log(req);
+    db.Score.create({
+      gameScore: req.body.gameScore,
+      gameId:req.body.gameId,
+      userId: req.body.userId
+    }).then(function(dbScore){
+      res.json(dbScore);
+    });
   });
   app.post("/api/newChallenge/",function(req, res){
     var challenger = req.body.challengerId;
