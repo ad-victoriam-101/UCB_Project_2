@@ -1,4 +1,7 @@
 /* Style sheet for actuall site */
+*:focus {
+  outline: none !important;
+}
 /* start of metal styling sheet */
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 @import url(prefixes.css);
@@ -414,4 +417,8 @@ body {
 }
 #buttonPadding{
   margin-left: 90px;
+  font-size: 20px;
+}
+#FontColor{
+  color: white !important;
 }
