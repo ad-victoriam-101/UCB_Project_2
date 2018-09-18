@@ -85,7 +85,7 @@ module.exports = function(app) {
       res.json(newArrayofScores);
     });
   });
-  app.post("/api/newscore/:id", function(req,res){
+  app.post("/api/newscore/", function(req,res){
     db.Score.create({
       gameScore: req.body.gameScore,
       gameId:req.body.gameId,
@@ -102,7 +102,7 @@ module.exports = function(app) {
     db.Challenge.create({
       post: post,
       challengerId: challenger,
-      ToBeChallengeId: toBeChallenge,
+      toBeChallengeId: toBeChallenge,
       gameId: gameId
     }).then(function(dbChallege){
       res.json(dbChallege);
