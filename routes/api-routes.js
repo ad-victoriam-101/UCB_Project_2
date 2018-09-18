@@ -51,11 +51,15 @@ module.exports = function(app) {
     }
   });
   // this route will be to get all games currently running.
-  //
-  //
-  //
-  //
-  //top scores for any give game id
+  app.get("/api/games", function(req, res){
+    db.Game.findAll({
+      attributes:["gameTitle"]
+    }
+    ).then(function(dbGame){
+      res.json(dbGame)
+    });
+  });
+  //top scores for any give game id returns gamesscore , gametitle and user
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -64,9 +68,18 @@ module.exports = function(app) {
       where:{
         gameId:gameId
       },
-      order:[["gameScore", "DESC"]]
-    }).then(function(dbScores){
-      res.json(dbScores);
+      order:[["gamescore", "DESC"]],
+      include:[db.Game,db.User]
+    }).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          gameTitle: item.Game.gameTitle,
+          user: item.User.email.split("@").shift(),
+          gameScore: item.dataValues.gamescore
+        });
+      });
+      res.json(data);
     });
   });
   // users score &&& game title
@@ -93,13 +106,18 @@ module.exports = function(app) {
   });
 
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
+<<<<<<< HEAD
+  // update or create
+=======
 
+>>>>>>> 147e3048a54d643e9f7d9a2a3e5003e031ffe3d6
   app.post("/api/newscore/", function(req,res){
     db.Score.create({
       gameScore: req.body.gameScore,
       gameId:req.body.gameId,
       userId: req.body.userId
     }).then(function(dbScore){
+      // true
       res.json(dbScore);
     });
   });
@@ -181,7 +199,6 @@ module.exports = function(app) {
   // this route will update challanges from true, which is active, to false. Requirement: an object with post, active , and challengerid.
   app.put("/api/updateChalleges",function(req, res){
     var challengeUpdate = {
-      post: req.body.post,
       active: req.body.active
     };
     db.Challenge.update(challengeUpdate,{
