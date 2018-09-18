@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
  
 </head>
 <body>
@@ -26,10 +26,10 @@
 
 <div class="container">
     <div class="row scores">
-        <div class="col-md-3"><h4><div id="score1"></div> BY <div id="user1"></div></h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
+        <div class="col-md-3"><h4><div id="score1"></div></h4></div> 
+        <div class="col-md-3"><h4><div id="score2"></div></h4></div>  
+        <div class="col-md-3"><h4><div id="score3"></div></h4></div>  
+        <div class="col-md-3"><h4><div id="score4"></div></h4></div>  
 
     </div>
 
@@ -37,21 +37,21 @@
 
         <div class="row .col-md-6 .offset-md-3">
             <div class="col-md-3 game">
-            <a href="../../game/pong/index.html"><h1>Pong</h1></a>
+            <a href="/game/pong/index.html"><h1>Pong</h1></a>
             </div>
 
             <div class="col-md-3 gme">
-            <a href="../../game/maze/index.html"><h1>Maze</h1></a>
+            <a href="/game/maze/index.html"><h1>Maze</h1></a>
             </div>
          </div>
 
          <div class="row games">
                 <div class="col-md-3 ">
-                <a href="../../game/pong/index.html"><h1>Pong Again</h1></a>
+                <a href="/game/Breakout/index.html"><h1>Breakout</h1></a>
                 </div>
     
                 <div class="col-md-3 game">
-                <a href="../../game/maze/index.html"><h1>Maze Again</h1></a>
+                <a href="/game/OUTRUN/index.html"><h1>Outrun (SEGA CLONE)</h1></a>
                 </div>
              </div>
 
@@ -66,10 +66,7 @@
                           </nav>
 </div>   
 <script>
-  function runQuery() {
-
-// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-$.ajax({ url: "/api/top_scores/:gameId", method: "GET" })
+$.ajax({ url: "/api/top_scores/1" , method: "GET" })
   .then(function(gameData) {
 
     // Here we then log the gamelistData to console, where it will show up as an object.
@@ -78,22 +75,18 @@ $.ajax({ url: "/api/top_scores/:gameId", method: "GET" })
 
     
 
-      var score1 = $("#score1");
+      var score1 = $("#score");
 
       
 
-      score1.append(
+      score.append(
  
         $("<h2>").text(gameId.dbScores),
  
       );
 
     
-    })}
- 
-    runQuery()
-
-
+    })
 </script>
 </body>
 </html>
