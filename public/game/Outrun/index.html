@@ -4,8 +4,8 @@
 <head>
   <title>Javascript Racer - v4 (final)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <link href="common.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
+  <link href="/game/outrun/common.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/game/main.css" />
 </head> 
 
 <body> 
@@ -84,21 +84,20 @@
   </div>
 
   <audio id='music'>
-    <source src="music/racer.ogg">
-    <source src="music/racer.mp3">
+    <source src="/game/outrun/music/racer.ogg">
+    <source src="/game/outrun/music/racer.mp3">
   </audio>
   <span id="mute"></span>
-
   <nav class="nav nav-box flex-column flex-sm-row">
 
-      <a class="flex-sm-fill text-sm-center nav-link" href="../Pong/index.html">Pong</a>
-      <a class="flex-sm-fill text-sm-center nav-link" href="../Maze/index.html">Maze</a>
-      <a class="flex-sm-fill text-sm-center nav-link" href="../Breakout/index.html">Breakout</a>
-      <a class="flex-sm-fill text-sm-center nav-link chosen" href="../Outrun/index.html">Outrun</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="/pong">Pong</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="/maze">Maze</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="/breakout">Breakout</a>
+      <a class="flex-sm-fill text-sm-center nav-link chosen" href="/outrun">Outrun</a>
     </nav>
 
-  <script src="stats.js"></script>
-  <script src="common.js"></script>
+  <script src="/game/outrun/stats.js"></script>
+  <script src="/game/outrun/common.js"></script>
   <script>
 
     var fps            = 60;                      // how many 'update' frames per second

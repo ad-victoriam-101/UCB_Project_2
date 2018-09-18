@@ -14,6 +14,7 @@ modelfungo = function() {
 
 };
 
+
 modelfunwin = function() {
   console.log("func called");
   modal.style.display = "block";
@@ -277,7 +278,7 @@ var maze = function (X, Y) {
       for (var i = 0; i < 2 * this.N + 1; i++) {
         for (var j = 0; j < 2 * this.M + 1; j++) {
           if (this.Board[i][j] != " "){//} && this.Board[i][j] != '&') {
-            this.ctx.fillStyle = "#000000";
+            this.ctx.fillStyle = "green";
             this.ctx.fillRect(scale * i, scale * j, scale, scale);
           } else if(i<5 && j <5) {
             temp.push([i,j]);

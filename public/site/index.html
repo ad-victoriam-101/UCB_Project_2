@@ -26,10 +26,10 @@
 
 <div class="container">
     <div class="row scores">
-        <div class="col-md-3"><h4><div id="score1"></div></h4></div> 
-        <div class="col-md-3"><h4><div id="score2"></div></h4></div>  
-        <div class="col-md-3"><h4><div id="score3"></div></h4></div>  
-        <div class="col-md-3"><h4><div id="score4"></div></h4></div>  
+        <div class="col-md-3"><div id="score1"></div></div> 
+        <div class="col-md-3"><div id="score2"></div></div>  
+        <div class="col-md-3"><div id="score3"></div></div>  
+        <div class="col-md-3"><div id="score4"></div></div>  
 
     </div>
 
@@ -59,22 +59,60 @@
         </div>
 
                      <nav class="nav nav-box flex-column flex-sm-row">
-                            <a class="flex-sm-fill text-sm-center nav-link chosen" href="../../public/site/index.html">Home</a>
-                            <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/profile.html">Profile</a>
-                            <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/challenges.html">Challenges</a>
+                            <a class="flex-sm-fill text-sm-center nav-link chosen" href="/home">Home</a>
+                            <a class="flex-sm-fill text-sm-center nav-link" href="/profile">Profile</a>
+                            <a class="flex-sm-fill text-sm-center nav-link" href="/challenges">Challenges</a>
                         
                           </nav>
 </div>   
 <script>
+
+    
 $.ajax({ url: "/api/top_scores/1" , method: "GET" })
   .then(function(gameData) {
 
     // Here we then log the gamelistData to console, where it will show up as an object.
     console.log(gameData);
     console.log("------------------------------------");
-      var score1 = $("#score");
+      var score1 = $("#score1");
       score1.append(
-        $("<h2>").text(),
+        $("<h4>").text(gameData[0].gameTitle + " " + gameData[0].gameScore + " BY " + gameData[0].user),
+      );
+    })
+
+    $.ajax({ url: "/api/top_scores/2" , method: "GET" })
+  .then(function(gameData) {
+
+    // Here we then log the gamelistData to console, where it will show up as an object.
+    console.log(gameData);
+    console.log("------------------------------------");
+      var score2 = $("#score2");
+      score2.append(
+        $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore + " BY " + gameData[0].user),
+      );
+    })
+
+    $.ajax({ url: "/api/top_scores/3" , method: "GET" })
+  .then(function(gameData) {
+
+    // Here we then log the gamelistData to console, where it will show up as an object.
+    console.log(gameData);
+    console.log("------------------------------------");
+      var score3 = $("#score3");
+      score3.append(
+        $("<h4>").text("|" +gameData[0].gameTitle + " " + gameData[0].gameScore + " BY " + gameData[0].user),
+      );
+    })
+
+    $.ajax({ url: "/api/top_scores/4" , method: "GET" })
+  .then(function(gameData) {
+
+    // Here we then log the gamelistData to console, where it will show up as an object.
+    console.log(gameData);
+    console.log("------------------------------------");
+      var score4 = $("#score4");
+      score4.append(
+        $("<h4>").text("|" +gameData[0].gameTitle + " " + gameData[0].gameScore + " BY " + gameData[0].user),
       );
     })
 </script>
