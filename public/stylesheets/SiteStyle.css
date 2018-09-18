@@ -1,4 +1,7 @@
 /* Style sheet for actuall site */
+*:focus {
+  outline: none !important;
+}
 /* start of metal styling sheet */
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans:regular,bold);
 @import url(prefixes.css);
@@ -61,7 +64,9 @@ a { text-decoration: none; display: block; }
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    animation-timing-function: ease;
 }
+
 .sidenavB {
     height: 100%;
     width: 80px;
@@ -72,6 +77,22 @@ a { text-decoration: none; display: block; }
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    animation-timing-function: ease;
+}
+.movingNav{
+  
+  animation: mymove 5s;
+}
+.movingNavB{
+  animation: mymoveB 5s;
+}
+@keyframes mymove {
+  from {left: -100px;}
+  to {left: 0px;}
+}
+@keyframes mymoveB {
+  from {right: -100px;}
+  to {right: 0px;}
 }
 
 .sidenav a {
@@ -210,8 +231,8 @@ body {
 }
 .containerCRT {
   background: #121010;
-  width: 80%;
-  height: 1000px;
+  width: 100%;
+  height: auto;
   margin-top: 10px;
   position: relative;
   overflow: hidden;
@@ -399,3 +420,12 @@ body {
   border-radius: 40% 40% 60% 60%;
   transition: opacity 200ms;
 }
+#buttonPadding{
+  margin-left: 90px;
+  font-size: 20px;
+}
+#FontColor{
+  color: white !important;
+}
+/* Stylefor Login/signup */
+

@@ -107,7 +107,7 @@ module.exports = function(app) {
 
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
   app.post("/api/newscore/", function(req,res){
-    db.Score.create({
+    db.Score.findOrCreate({
       gameScore: req.body.gameScore,
       gameId:req.body.gameId,
       userId: req.body.userId

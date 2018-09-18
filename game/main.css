@@ -1,4 +1,6 @@
-
+*:focus {
+    outline: none !important;
+}
 
 
 body{
@@ -50,7 +52,9 @@ h6{
     color:green;
     font-family: 'VT323', monospace;
 }
-pre{color:green}
+pre{
+    color:green;
+}
 .container{
     align-content: center
 }
