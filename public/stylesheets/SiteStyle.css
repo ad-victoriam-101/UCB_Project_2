@@ -232,6 +232,7 @@ body {
 .containerCRT {
   background: #121010;
   width: 100%;
+  min-width: 1200px;
   height: auto;
   margin-top: 10px;
   position: relative;
@@ -421,8 +422,9 @@ body {
   transition: opacity 200ms;
 }
 #buttonPadding{
-  margin-left: 90px;
-  font-size: 20px;
+  margin-left: 65px;
+  font-size: 30px;
+  min-width: 1300px;
 }
 #FontColor{
   color: white !important;
