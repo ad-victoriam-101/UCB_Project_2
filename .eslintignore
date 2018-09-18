@@ -3,4 +3,4 @@ node_modules
 config/passport.js
 /public/js/signup.js
 /public/js/login.js
-/game
+public/game

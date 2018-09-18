@@ -33,4 +33,14 @@ module.exports = function(app) {
     // res.sendFile(path.join(__dirname, "../public/" + variable + ".html"));
   });
 
+  app.get("/home", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/site/index.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/site/index.html"));
+    }
+  });
+
+
 };
