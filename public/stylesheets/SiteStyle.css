@@ -64,12 +64,10 @@ a { text-decoration: none; display: block; }
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
-    animation: mymove 5s;
     animation-timing-function: ease;
 }
 
 .sidenavB {
-    animation: mymoveB 5s;
     height: 100%;
     width: 80px;
     position: fixed;
@@ -80,6 +78,13 @@ a { text-decoration: none; display: block; }
     overflow-x: hidden;
     padding-top: 20px;
     animation-timing-function: ease;
+}
+.movingNav{
+  
+  animation: mymove 5s;
+}
+.movingNavB{
+  animation: mymoveB 5s;
 }
 @keyframes mymove {
   from {left: -100px;}
