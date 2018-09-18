@@ -63,6 +63,41 @@ module.exports = function(app) {
     }
   });
 
+  app.get("/pong", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/game/pong/index.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/game/pong/index.html"));
+    }
+  });
+
+  app.get("/maze", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/game/maze/index.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/game/maze/index.html"));
+    }
+  });
+
+  app.get("/breakout", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/game/breakout/index.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/game/breakout/index.html"));
+    }
+  });
+
+  app.get("/outrun", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/game/outrun/index.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/game/outrun/index.html"));
+    }
+  });
 
 
 

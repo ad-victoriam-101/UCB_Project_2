@@ -204,7 +204,7 @@ var Game = { // a modified version of the game loop from my previous boulderdash
       var name = names[n];
       result[n] = document.createElement("img");
       Dom.on(result[n], "load", onload);
-      result[n].src = "images/" + name + ".png";
+      result[n].src = "/game/outrun/images/" + name + ".png";
     }
   },
 
