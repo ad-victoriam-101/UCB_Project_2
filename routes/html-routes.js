@@ -30,8 +30,7 @@ module.exports = function(app) {
   });
   app.get("/game/:id", isAuthenticated, function(req, res) {
     // i dont know if we are still using handlebars or desided otherwise.
-    // res.sendFile(path.join(__dirname, "../public/members.html"));
-    // res.render("index", hbsObject);
+    // res.sendFile(path.join(__dirname, "../public/" + variable + ".html"));
   });
 
 };
