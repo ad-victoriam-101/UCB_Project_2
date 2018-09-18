@@ -23,9 +23,9 @@
                     \/___/   \/_____/\/_____/\/_/ \/_/\/_/   </pre>
                    </div>
 
-  <canvas id="game-canvas" height="600px" width="800px"></canvas> </canvas>
+  <canvas id="game-canvas" class="game" height="600px" width="800px" style="margin-left:auto; margin-right:auto"></canvas> </canvas>
 
-  <nav class="nav nav-box flex-column flex-sm-row">
+  <nav class="nav nav-box flex-column flex-sm-row space">
         <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/index.html">Home</a>
         <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/profile.html">Profile</a>
         <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/challenges.html">Challenges</a>
@@ -81,7 +81,7 @@
       function drawPong() {
         ctx.beginPath();
         ctx.rect(pongX, canvas.height - pongH, pongW, pongH);
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "green";
         ctx.fill();
         ctx.closePath();
       }
