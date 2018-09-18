@@ -10,3 +10,6 @@ body{
   background-image: url("../images/arcade\ machine.jpg");
   background-size: cover;
 }
+#loginDiv{
+  margin-top: 100px !important;
+}
