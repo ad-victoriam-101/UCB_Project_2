@@ -338,3 +338,64 @@ body {
   animation: overlay-anim 5s linear;
   animation-fill-mode: forwards;
 }
+/* style for arcade buttons */
+[class*="push"] {
+  position: relative;
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  border: 0;
+  margin: 1em;
+  outline: none;
+  background-color: rgba(194, 41, 10, 1);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow 200ms;
+}
+.push--flat {
+  box-shadow: inset 0 7.5px 0 rgba(218, 46, 11, 1), inset 0 -7.5px 0 rgba(170, 36, 9, 1), inset 0 0 0 7.5px rgba(179, 38, 9, 1), inset 0 0 0 20px rgba(194, 41, 10, 1), inset 0 0 0 24px rgba(97, 20, 5, 1), inset 0 0 0 26.08696px rgba(0, 0, 0, 1), inset 0 0 0 32px rgba(247, 133, 110, 0.7), inset 0 0 0 43.63636px rgba(194, 41, 10, 1), inset 0 96px 32px rgba(170, 36, 9, 1), inset 0 0 24px 40px rgba(145, 31, 8, 1), 0 12px 0 rgba(0, 0, 0, .3);
+}
+.push--flat:after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 24px;
+  display: block;
+  width: 192px;
+  height: 192px;
+  border: 16px solid rgba(0, 0, 0, .3);
+  border-width: 0 0 16px;
+  border-radius: 50%;
+  transition-duration: 200ms;
+}
+.push--flat:active, .push--flat.is-pushed {
+  box-shadow: inset 0 7.5px 0 rgba(218, 46, 11, 1), inset 0 -7.5px 0 rgba(170, 36, 9, 1), inset 0 0 0 7.5px rgba(179, 38, 9, 1), inset 0 0 0 20px rgba(194, 41, 10, 1), inset 0 0 0 24px rgba(97, 20, 5, 1), inset 0 0 0 28.23529px rgba(0, 0, 0, 1), inset 0 0 0 32px rgba(247, 133, 110, 0.2), inset 0 0 0 43.63636px rgba(179, 38, 9, 1), inset 0 96px 32px rgba(155, 33, 8, 1), inset 0 0 24px 40px rgba(121, 26, 6, 1), 0 12px 0 rgba(0, 0, 0, .3);
+  background-color: rgba(184, 39, 10, 1);
+}
+.push--flat:active:after, .push--flat.is-pushed:after {
+  bottom: 28px;
+  border-width: 0;
+}
+.push--skeuo {
+  box-shadow: inset 0 10px 0 rgba(218, 46, 11, 1), inset 0 -10px 4px rgba(170, 36, 9, 1), 0 0 4px rgba(194, 41, 10, 1), inset 0 0 8px rgba(121, 26, 6, 1), inset 0 0 8px rgba(51, 51, 51, 0.5), inset 0 0 4px 20px rgba(194, 41, 10, 1), inset 0 -8px 6px 24px rgba(51, 51, 51, 0.7), inset 0 0 4px 24px rgba(97, 20, 5, 1), inset 0 0 4px 24px rgba(51, 51, 51, 0.7), inset 0 0 2px 26.08696px rgba(0, 0, 0, 1), inset 0 0 2px 30px rgba(247, 133, 110, 0.7), inset 0 12px 0 28.23529px rgba(244, 71, 37, 0.7), inset 0 -12px 4px 28.23529px rgba(145, 31, 8, 0.2), inset 0 0 0 43.63636px rgba(194, 41, 10, 1), inset 0 96px 32px rgba(170, 36, 9, 1), inset 0 0 24px 40px rgba(145, 31, 8, 1), 0 6px 12px rgba(0, 0, 0, .5);
+}
+.push--skeuo:active, .push--skeuo.is-pushed {
+  box-shadow: inset 0 10px 0 rgba(218, 46, 11, 1), inset 0 -10px 4px rgba(170, 36, 9, 1), 0 0 4px rgba(194, 41, 10, 1), inset 0 0 8px rgba(121, 26, 6, 1), inset 0 0 8px rgba(51, 51, 51, 0.5), inset 0 0 4px 20px rgba(194, 41, 10, 1), inset 0 -8px 6px 24px rgba(51, 51, 51, 0.7), inset 0 0 4px 24px rgba(97, 20, 5, 1), inset 0 0 4px 24px rgba(51, 51, 51, 0.7), inset 0 0 6px 28.23529px rgba(0, 0, 0, 1), inset 0 0 2px 32px rgba(247, 133, 110, 0.2), inset 0 12px 0 28px rgba(244, 71, 37, 0.5), inset 0 -12px 4px 28px rgba(97, 20, 5, 0.2), inset 0 0 0 43.63636px rgba(179, 38, 9, 1), inset 0 96px 32px rgba(155, 33, 8, 1), inset 0 0 24px 40px rgba(121, 26, 6, 1), 0 6px 12px rgba(0, 0, 0, .5);
+  background-color: rgba(184, 39, 10, 1);
+}
+.push--skeuo:active:before, .push--skeuo.is-pushed:before {
+  opacity: 0.5;
+}
+.push--skeuo:before {
+  content: '';
+  position: absolute;
+  bottom: 53.33333px;
+  left: 66.66667px;
+  display: block;
+  width: 109.09091px;
+  height: 72.72727px;
+  background: rgba(247, 133, 110, 0.2);
+  background: linear-gradient(to top, rgba(250, 173, 158, 0.3) 0%, rgba(194, 41, 10, 0.1) 100%);
+  border-radius: 40% 40% 60% 60%;
+  transition: opacity 200ms;
+}
