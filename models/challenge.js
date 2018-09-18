@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue : true
     }
   });
-  Challenge.associate = function(models) {
+  Challenge.associate = function(models){
     Challenge.belongsTo(models.Game, {
       foreignKey: {
         allowNull: false,

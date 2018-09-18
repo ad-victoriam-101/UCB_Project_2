@@ -50,32 +50,20 @@ module.exports = function(app) {
       });
     }
   });
-  app.get("/api/user_data", function(req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-  });
-  app.get("/api/leaderboard/:gameId", function(req, res){
+  app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
-      attributes:["gamescore", "User.email"],
+      limit:5,
+      attributes:["gamescore"],
       where:{
         gameId:gameId
       },
-      order:[["gameScore", "DESC"]],
-      include:[db.User, db.Game]
+      order:[["gameScore", "DESC"]]
     }).then(function(dbScores){
       res.json(dbScores);
     });
   });
+  // users score &&& game title
   app.get("/api/userdata/:userId", function(req, res){
     db.Score.findAll(
       {
@@ -96,6 +84,23 @@ module.exports = function(app) {
       });
       res.json(newArrayofScores);
     });
-
+  });
+  app.post("/api/newscore/:id", function(req,res){
+    console.log(res);
+    console.log(req);
+  });
+  app.post("/api/newChallenge/",function(req, res){
+    var challenger = req.body.challengerId;
+    var toBeChallenge = req.body.ToBeChallengeId;
+    var post = req.body.post;
+    var gameId = req.body.gameId;
+    db.Challenge.create({
+      post: post,
+      challengerId: challenger,
+      ToBeChallengeId: toBeChallenge,
+      gameId: gameId
+    }).then(function(dbChallege){
+      res.json(dbChallege);
+    });
   });
 };
