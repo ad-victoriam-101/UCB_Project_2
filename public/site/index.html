@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BOOM!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
- 
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
+
 <body>
-    <div class= "title .offset-md-6 "><h1> <pre>
+    <div class="title .offset-md-6 ">
+        <h1>
+            <pre>
  _____    _____   _____            __     
 /\  _ `\ /\  __`\/\  __`\  /'\_/`\/\ \    
 \ \ \L\\\ \ \/\ \ \ \/\ \/\      \ \ \   
@@ -23,77 +28,107 @@
    \ \____/ \ \_____\ \_____\ \_\\ \_\/\_\
      \/___/   \/_____/\/_____/\/_/ \/_/\/_/   </pre>
     </div>
-
-<div class="container">
-    <div class="row scores">
-        <div class="col-md-3"><h4><div id="score1"></div> BY <div id="user1"></div></h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
-        <div class="col-md-3"><h4>!EXAMPLE SCORE BY EXAPMLE!</h4></div> 
-
-    </div>
-
-    <div class="games offset-md-3">
-
-        <div class="row .col-md-6 .offset-md-3">
-            <div class="col-md-3 game">
-            <a href="../../game/pong/index.html"><h1>Pong</h1></a>
-            </div>
-
-            <div class="col-md-3 gme">
-            <a href="../../game/maze/index.html"><h1>Maze</h1></a>
-            </div>
-         </div>
-
-         <div class="row games">
-                <div class="col-md-3 ">
-                <a href="../../game/pong/index.html"><h1>Pong Again</h1></a>
-                </div>
-    
-                <div class="col-md-3 game">
-                <a href="../../game/maze/index.html"><h1>Maze Again</h1></a>
-                </div>
-             </div>
-
-
+    <!-- metal sidebars -->
+        <div class="sidenav metal  linear">
         </div>
+        <div class="sidenavB metal linear">
+        </div>
+    <!-- start of CRT div -->
+    <div class="container">
+        <div class="containerCRT">
+            <div>
+                <div class="row scores">
+                    <div class="col-md-3">
+                        <h4>
+                            <div id="score1"></div> BY <div id="user1"></div>
+                        </h4>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>!EXAMPLE SCORE BY EXAPMLE!</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>!EXAMPLE SCORE BY EXAPMLE!</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>!EXAMPLE SCORE BY EXAPMLE!</h4>
+                    </div>
 
-                     <nav class="nav nav-box flex-column flex-sm-row">
-                            <a class="flex-sm-fill text-sm-center nav-link chosen" href="../../public/site/index.html">Home</a>
-                            <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/profile.html">Profile</a>
-                            <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/challenges.html">Challenges</a>
-                        
-                          </nav>
-</div>   
-<script>
-  function runQuery() {
+                </div>
 
-// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-$.ajax({ url: "/api/top_scores/:gameId", method: "GET" })
-  .then(function(gameData) {
+                <div class="games offset-md-3">
 
-    // Here we then log the gamelistData to console, where it will show up as an object.
-    console.log(gameData);
-    console.log("------------------------------------");
+                    <div class="row .col-md-6 .offset-md-3">
+                        <div class="col-md-3 game">
+                            <a href="../../game/pong/index.html">
+                                <h1>Pong</h1>
+                            </a>
+                        </div>
 
-    
+                        <div class="col-md-3 gme">
+                            <a href="../../game/maze/index.html">
+                                <h1>Maze</h1>
+                            </a>
+                        </div>
+                    </div>
 
-      var score1 = $("#score1");
+                    <div class="row games">
+                        <div class="col-md-3 ">
+                            <a href="../../game/pong/index.html">
+                                <h1>Pong Again</h1>
+                            </a>
+                        </div>
 
-      
-
-      score1.append(
- 
-        $("<h2>").text(gameId.dbScores),
- 
-      );
-
-    
-    })}
- 
-    runQuery()
+                        <div class="col-md-3 game">
+                            <a href="../../game/maze/index.html">
+                                <h1>Maze Again</h1>
+                            </a>
+                        </div>
+                    </div>
 
 
-</script>
+                </div>
+
+                <nav class="nav nav-box flex-column flex-sm-row">
+                    <a class="flex-sm-fill text-sm-center nav-link chosen" href="../../public/site/index.html">Home</a>
+                    <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/profile.html">Profile</a>
+                    <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/challenges.html">Challenges</a>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script>
+        function runQuery() {
+
+            // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+            $.ajax({
+                    url: "/api/top_scores/:gameId",
+                    method: "GET"
+                })
+                .then(function (gameData) {
+
+                    // Here we then log the gamelistData to console, where it will show up as an object.
+                    console.log(gameData);
+                    console.log("------------------------------------");
+
+
+
+                    var score1 = $("#score1");
+
+
+
+                    score1.append(
+
+                        $("<h2>").text(gameId.dbScores),
+
+                    );
+
+
+                })
+        }
+
+        runQuery()
+    </script>
 </body>
+
 </html>
