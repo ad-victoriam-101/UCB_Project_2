@@ -50,6 +50,7 @@ module.exports = function(app) {
       });
     }
   });
+  //top scores for any give game id
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -85,6 +86,7 @@ module.exports = function(app) {
       res.json(newArrayofScores);
     });
   });
+  // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
   app.post("/api/newscore/", function(req,res){
     db.Score.create({
       gameScore: req.body.gameScore,
@@ -94,29 +96,93 @@ module.exports = function(app) {
       res.json(dbScore);
     });
   });
+  // this route will create a new chanllge requirements challengerId, toBeChallengeId, post, and gameId
   app.post("/api/newChallenge/",function(req, res){
     var challenger = req.body.challengerId;
-    var toBeChallenge = req.body.ToBeChallengeId;
+    var toBeChallenge = req.body.toBeChallengeId;
     var post = req.body.post;
     var gameId = req.body.gameId;
     db.Challenge.create({
       post: post,
       challengerId: challenger,
-      toBeChallengeId: toBeChallenge,
+      ToBeChallengeId: toBeChallenge,
       gameId: gameId
     }).then(function(dbChallege){
       res.json(dbChallege);
     });
   });
+  // this route will return active challenges
   app.get("/api/userdata/challenges/:challengerId", function(req, res){
     db.Challenge.findAll(
       {
         where:{
-          challengerId: req.params.challengerId
+          challengerId: req.params.challengerId,
+          active:true
         },
-        order:[["createdAt", "ASC"]]
+        order:[["createdAt", "ASC"]],
+        include:[{
+          model:db.User,
+          as:"ToBeChallenge"
+        },{
+          model:db.User,
+          as:"challenger"
+        }]
       }
     ).then(function(dbScore){
-      res.json(dbScore);
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          post: item.post,
+          active: item.active,
+          challenger: item.challenger.email.split("@").shift(),
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+        });
+      });
+      res.json(data);
     });
+  });
+  // this route return all challenges posted from other users.
+  app.get("/api/userdata/toBechallenge/:toBeChallengeId", function(req, res){
+    db.Challenge.findAll(
+      {
+        where:{
+          toBeChallengeIdId: req.params.toBeChallengeId,
+          active:true
+        },
+        order:[["createdAt", "ASC"]],
+        include:[{
+          model:db.User,
+          as:"ToBeChallenge"
+        },{
+          model:db.User,
+          as:"challenger"
+        }]
+      }
+    ).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          post: item.post,
+          active: item.active,
+          challenger: item.challenger.email.split("@").shift(),
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+        });
+      });
+      res.json(data);
+    });
+  });
+  // this route will update challanges from true, which is active, to false. Requirement: an object with post, active , and challengerid.
+  app.put("/api/updateChalleges",function(req, res){
+    var challengeUpdate = {
+      post: req.body.post,
+      active: req.body.active
+    };
+    db.Challenge.update(challengeUpdate,{
+      where:{
+        challengerId: req.body.challengerId
+      }
+    }).then(function(dbChallege){
+      res.json(dbChallege);
+    });
+  });
 };
