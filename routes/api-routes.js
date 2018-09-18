@@ -50,6 +50,11 @@ module.exports = function(app) {
       });
     }
   });
+  // this route will be to get all games currently running.
+  //
+  //
+  //
+  //
   //top scores for any give game id
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
@@ -96,7 +101,7 @@ module.exports = function(app) {
       res.json(dbScore);
     });
   });
-  // this route will create a new chanllge requirements challengerId, toBeChallengeId, post, and gameId
+  // this route will create a new chanllenge requirements challengerId, toBeChallengeId, post, and gameId
   app.post("/api/newChallenge/",function(req, res){
     var challenger = req.body.challengerId;
     var toBeChallenge = req.body.toBeChallengeId;
