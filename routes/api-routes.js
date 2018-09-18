@@ -108,4 +108,15 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
+  app.get("/api/userdata/challenges/:challengerId", function(req, res){
+    db.Challenge.findAll(
+      {
+        where:{
+          challengerId: req.params.challengerId
+        },
+        order:[["createdAt", "ASC"]]
+      }
+    ).then(function(dbScore){
+      res.json(dbScore);
+    });
 };
