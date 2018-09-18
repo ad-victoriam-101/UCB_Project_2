@@ -1,4 +1,3 @@
-// "use strict";
 
 /**
  * Settings
@@ -163,9 +162,9 @@ Player.prototype.update = function (keysDown) {
   for (var key in keysDown) {
     value = Number(key);
     if (value === LEFTARROW) {
-      this.paddle.move(-4, 0);
+      this.paddle.move(-6, 0);
     } else if (value === RIGHTARROW) {
-      this.paddle.move(4, 0);
+      this.paddle.move(6, 0);
     } else {
       this.paddle.move(0, 0);
     }
@@ -301,7 +300,7 @@ Ball.prototype.update = function (playerBottom, playerTop) {
     var ballHitTopPaddle = ballTopIsOverTopPaddle && ballBottomIsUnderTopPaddle && ballXOverlapsTopPaddle;
 
     if (ballHitTopPaddle) {
-      this.y_speed = randomOffset(0.9 * Math.abs(paddleTop.x_speed || 4), Math.abs(paddleTop.x_speed || 4));
+      this.y_speed = randomOffset(0.9 * Math.abs(paddleTop.x_speed || 3), Math.abs(paddleTop.x_speed || 3));
       this.x_speed += (paddleTop.x_speed / 2);
       this.y += this.y_speed;
     }

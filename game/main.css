@@ -34,3 +34,6 @@ text{color:green;font-family: 'VT323', monospace;}
 .title{height:300px;display: flex;justify-content:center;padding:.3%;text-align: center;text-align: center}
 
 .scores{background-color: green;color: black;margin-top:2%;}
+
+td{color:green;font-family: 'VT323', monospace;}
+th{color:green;font-family: 'VT323', monospace;}

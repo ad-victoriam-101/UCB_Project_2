@@ -6,24 +6,41 @@
         <script src="pong.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
         <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
     </head>
     <body>
 
-      <!-- nav bar -->
-
-      <h1>Ze Best Game In Ze World</h1>
+      <div class= "title .offset-md-6 "><h5> <pre>
+            _____    _____   _____            __     
+           /\  _ `\ /\  __`\/\  __`\  /'\_/`\/\ \    
+           \ \ \L\\\ \ \/\ \ \ \/\ \/\      \ \ \   
+            \ \  _ '\ \ \ \ \ \ \ \ \ \ \__\ \ \ \  
+             \ \ \L\ \\ \ \_\ \ \ \_\ \ \ \_/\ \ \_\ 
+              \ \____/ \ \_____\ \_____\ \_\\ \_\/\_\
+                \/___/   \/_____/\/_____/\/_/ \/_/\/_/   </pre>
+               </div>
+           
+               <h1 id="heading" style="background-color: green; text-decoration-style: solid; color: black; width: 40%; margin-top: 0px; margin-bottom: 10px">tHE aMazIng pOnG</h1>
         <div class="game" id="pong-game"></div>
 
         <nav class="nav nav-box flex-column flex-sm-row">
                 <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/index.html">Home</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/profile.html">Profile</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="../../public/site/challenges.html">Challenges</a>
+                <a class="flex-sm-fill text-sm-center nav-link chosen" href="../Pong/index.html">Pong</a>
+                <a class="flex-sm-fill text-sm-center nav-link" href="../Maze/index.html">Maze</a>
+                
+            
             
               </nav>
+
+              
         <script>
+
             new Pong('pong-game', window, document);
 
-    
         </script>
     </body>
 </html>

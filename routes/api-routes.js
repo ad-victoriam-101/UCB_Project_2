@@ -85,7 +85,7 @@ module.exports = function(app) {
       res.json(newArrayofScores);
     });
   });
-  app.post("/api/newscore/:id", function(req,res){
+  app.post("/api/newscore/", function(req,res){
     db.Score.create({
       gameScore: req.body.gameScore,
       gameId:req.body.gameId,

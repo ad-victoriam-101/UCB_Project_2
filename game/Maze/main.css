@@ -68,8 +68,8 @@
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #41d9f4;
-    color: white;
+    background-color: green;
+    color: red;
     text-align: center;
     height : 50%;
 }
@@ -78,8 +78,8 @@
 
 .modal-footer {
     padding: 2px 16px;
-    background-color:#f4bc42;
-    color: white;
+    background-color:black;
+    color: black;
     text-align: center;
     height: 50%;
 
