@@ -61,8 +61,12 @@ a { text-decoration: none; display: block; }
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    animation: mymove 5s;
+    animation-timing-function: ease;
 }
+
 .sidenavB {
+    animation: mymoveB 5s;
     height: 100%;
     width: 80px;
     position: fixed;
@@ -72,6 +76,15 @@ a { text-decoration: none; display: block; }
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    animation-timing-function: ease;
+}
+@keyframes mymove {
+  from {left: -100px;}
+  to {left: 0px;}
+}
+@keyframes mymoveB {
+  from {right: -100px;}
+  to {right: 0px;}
 }
 
 .sidenav a {
@@ -210,7 +223,7 @@ body {
 }
 .containerCRT {
   background: #121010;
-  width: 80%;
+  width: 100%;
   height: 1000px;
   margin-top: 10px;
   position: relative;
@@ -398,4 +411,7 @@ body {
   background: linear-gradient(to top, rgba(250, 173, 158, 0.3) 0%, rgba(194, 41, 10, 0.1) 100%);
   border-radius: 40% 40% 60% 60%;
   transition: opacity 200ms;
+}
+#buttonPadding{
+  margin-left: 90px;
 }
