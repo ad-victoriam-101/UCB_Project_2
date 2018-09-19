@@ -17,6 +17,9 @@ module.exports = function(sequelize, DataTypes){
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    userQuote:{
+      type:DataTypes.TEXT
     }
   });
   User.associate = function(models) {

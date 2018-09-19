@@ -28,7 +28,7 @@ module.exports = function(app) {
   app.get("/members", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
-  app.get("/game/:id", isAuthenticated, function(req, res) {
+  app.get("/game/:id", isAuthenticated, function() {
     // i dont know if we are still using handlebars or desided otherwise.
     // res.sendFile(path.join(__dirname, "../public/" + variable + ".html"));
   });
@@ -41,6 +41,29 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/site/index.html"));
     }
   });
+
+
+
+
+  app.get("/profile", function(req, res){
+  // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/site/profile.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/site/profile.html"));
+    }
+  });
+
+  app.get("/challenges", function(req, res){
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.sendFile(path.join(__dirname, "../public/site/challenges.html"));
+    } else{
+      res.sendFile(path.join(__dirname, "../public/site/challenges.html"));
+    }
+  });
+
+
 
 
 };
