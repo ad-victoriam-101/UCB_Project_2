@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes){
       type: DataTypes.STRING,
       allowNull: false
     },
-    userQuote:{
-      type:DataTypes.TEXT
+    quote: {
+      type: DataTypes.TEXT
     }
   });
   User.associate = function(models) {

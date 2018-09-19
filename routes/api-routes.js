@@ -2,6 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -20,7 +21,8 @@ module.exports = function(app) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      quote: req.body.quote
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
@@ -204,4 +206,22 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
+<<<<<<< HEAD
+  app.get("/api/leadership", function(req, res){
+    var maxScores = [];
+    db.Score.findAll({
+      limit:5,
+      attributes:["gamescore"],
+      where:{
+        gameId:1
+      },
+      order:[["gamescore", "DESC"]],
+      include:[db.Game,db.User]
+    }).then(function(dbGame1){
+      maxScores.push(dbGame1[0]);
+      
+    });
+  });
+=======
+>>>>>>> 4c3c493a66bbb09285968b122dfbb7f37aca3656
 };
