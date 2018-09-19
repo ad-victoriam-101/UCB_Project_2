@@ -56,7 +56,7 @@ module.exports = function(app) {
       attributes:["gameTitle"]
     }
     ).then(function(dbGame){
-      res.json(dbGame)
+      res.json(dbGame);
     });
   });
   //top scores for any give game id returns gamesscore , gametitle and user
