@@ -12,7 +12,11 @@ html {
 
 body {
     background-color: black;
-    margin: 100px;
+    background-image: url("../images/what-the-hex-dark.png");
+    background-size: cover;
+    /* background-repeat: repeat-y; */
+    background-repeat: repeat;
+    z-index: -10;
 }
 
 button { border: none; display: block; }
@@ -109,8 +113,6 @@ a { text-decoration: none; display: block; }
 
 .main {
     margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
 }
 
 @media screen and (max-height: 450px) {
@@ -125,6 +127,14 @@ body {
   color: white;
   padding-top: 20px;
   padding-left: 20px;
+}
+body {
+    background-color: black;
+    background-image: url("../images/what-the-hex-dark.png");
+    background-size: cover;
+    /* background-repeat: repeat-y; */
+    background-repeat: repeat;
+    z-index: -10;
 }
 #switch {
   display: none;
@@ -421,11 +431,11 @@ body {
   transition: opacity 200ms;
 }
 #buttonPadding{
-  margin-left: 90px;
   font-size: 20px;
+  color: white !important;
 }
 #FontColor{
-  color: white !important;
+    color: white !important;
 }
 /* Stylefor Login/signup */
 
