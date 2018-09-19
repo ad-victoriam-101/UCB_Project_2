@@ -206,12 +206,12 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
-  app.get("/api/games", function(req, res){
-    db.Game.findAll({
-      attributes:["gameTitle"]
+  app.get("/api/users", function(req, res){
+    db.User.findAll({
+      attributes:["email"]
     }
-    ).then(function(dbGame){
-      res.json(dbGame);
+    ).then(function(dbUser){
+      res.json(dbUser);
     });
   });
 
