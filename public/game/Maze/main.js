@@ -20,6 +20,7 @@ modelfunwin = function() {
   modal.style.display = "block";
   x = document.querySelector(".gamehead");
   x.textContent = "Congrats! You Win";
+  app.post("/api/newscore/" + minutes + seconds + 2 + 1)
 
 };
 

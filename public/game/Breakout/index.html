@@ -133,7 +133,7 @@
         ctx.closePath();
       });
     }
-
+    var count = 0;
     function collisionDetection() {
       bricks.forEach(function (b) {
         if (!b.status) return;
@@ -144,6 +144,8 @@
         if (inBricksColumn && inBricksRow) {
           dy = -dy;
           b.status = 0;
+          count ++
+          console.log(count)
         }
       });
     }
@@ -184,6 +186,7 @@
           dy = -0     
           lives =3
           alert("game over")
+          app.post("/api/newscore/" + count + 2 + 1)
       draw()
         }
         drawLives()

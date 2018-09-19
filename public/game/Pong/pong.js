@@ -257,7 +257,8 @@ Ball.prototype.update = function (playerBottom, playerTop) {
       playerTop.score++;
     }
     if (playerTop.score===10){
-      
+      alert("Game Over")
+      app.post("/api/newscore/" + playerBottom.score + 1 + 1)
       this.elementDestroyed();
     } else{
       this.reset();
