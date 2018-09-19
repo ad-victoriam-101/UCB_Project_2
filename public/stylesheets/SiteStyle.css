@@ -12,7 +12,11 @@ html {
 
 body {
     background-color: black;
-    margin: 100px;
+    background-image: url("../images/what-the-hex-dark.png");
+    background-size: cover;
+    /* background-repeat: repeat-y; */
+    background-repeat: repeat;
+    z-index: -10;
 }
 
 button { border: none; display: block; }
@@ -125,6 +129,14 @@ body {
   color: white;
   padding-top: 20px;
   padding-left: 20px;
+}
+body {
+    background-color: black;
+    background-image: url("../images/what-the-hex-dark.png");
+    background-size: cover;
+    /* background-repeat: repeat-y; */
+    background-repeat: repeat;
+    z-index: -10;
 }
 #switch {
   display: none;
