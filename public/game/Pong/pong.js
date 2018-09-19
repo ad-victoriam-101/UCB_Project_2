@@ -2,7 +2,7 @@
 var DIFFICULTY = 1; // from 0 to 1, 1 being hardest
 
 var WIDTH = 500;
-var HEIGHT = 750;
+var HEIGHT = 650;
 var PADDLEWIDTH = 50;
 var LEFTARROW = 37;
 var RIGHTARROW = 39;
@@ -257,7 +257,8 @@ Ball.prototype.update = function (playerBottom, playerTop) {
       playerTop.score++;
     }
     if (playerTop.score===10){
-      alert("game Over");
+      alert("Game Over")
+      app.post("/api/newscore/" + playerBottom.score + 1 + 1)
       this.elementDestroyed();
     } else{
       this.reset();
