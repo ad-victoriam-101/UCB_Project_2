@@ -206,22 +206,18 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
-<<<<<<< HEAD
-  app.get("/api/leadership", function(req, res){
-    var maxScores = [];
-    db.Score.findAll({
-      limit:5,
-      attributes:["gamescore"],
-      where:{
-        gameId:1
-      },
-      order:[["gamescore", "DESC"]],
-      include:[db.Game,db.User]
-    }).then(function(dbGame1){
-      maxScores.push(dbGame1[0]);
-      
-    });
-  });
-=======
->>>>>>> 4c3c493a66bbb09285968b122dfbb7f37aca3656
+  // app.get("/api/leadership", function(req, res){
+  //   var maxScores = [];
+  //   db.Score.findAll({
+  //     limit:5,
+  //     attributes:["gamescore"],
+  //     where:{
+  //       gameId:1
+  //     },
+  //     order:[["gamescore", "DESC"]],
+  //     include:[db.Game,db.User]
+  //   }).then(function(dbGame1){
+  //     maxScores.push(dbGame1[0]);
+  //   });
+  // });
 };

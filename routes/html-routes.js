@@ -40,13 +40,6 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/site/index.html"));
     }
   });
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 4c3c493a66bbb09285968b122dfbb7f37aca3656
   app.get("/profile", function(req, res){
   // If the user already has an account send them to the members page
     if (req.user) {
