@@ -31,17 +31,8 @@ require("./routes/api-routes.js")(app);
 
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({}).then(function() {
+db.sequelize.sync().then(function(){
   app.listen(PORT, function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
-    // db.Score.bulkCreate([
-    //   {gameScore:12, UserId:1, GameId:2,},
-    //   {gameScore:35, UserId:3, GameId:1,},
-    //   {gameScore:56, UserId:1, GameId:4,},
-    //   {gameScore:68, UserId:1, GameId:5},
-    //   {gameScore:64, UserId:2, GameId:1}
-    // ]).then(function(dbChallenge){
-    //   console.log(dbChallenge);
-    // });
   });
 });

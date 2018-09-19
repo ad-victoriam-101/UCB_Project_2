@@ -21,7 +21,8 @@ module.exports = function(app) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      quote: req.body.quote
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
@@ -51,38 +52,173 @@ module.exports = function(app) {
       });
     }
   });
-  app.get("/api/leaderboard", function(req, res){
-    db.Score.findAll(
-      {
-        attributes:["gameScore", "userId"]
-      }
-    ).then(function(dbScore){
-      res.json(dbScore);
+  // this route will be to get all games currently running.
+  app.get("/api/games", function(req, res){
+    db.Game.findAll({
+      attributes:["gameTitle"]
+    }
+    ).then(function(dbGame){
+      res.json(dbGame);
     });
   });
-  app.get("/api/userdata/:id", function(req, res){
+  //top scores for any give game id returns gamesscore , gametitle and user
+  app.get("/api/top_scores/:gameId", function(req, res){
+    var gameId = req.params.gameId;
+    db.Score.findAll({
+      limit:5,
+      attributes:["gamescore"],
+      where:{
+        gameId:gameId
+      },
+      order:[["gamescore", "DESC"]],
+      include:[db.Game,db.User]
+    }).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          gameTitle: item.Game.gameTitle,
+          user: item.User.email.split("@").shift(),
+          gameScore: item.dataValues.gamescore
+        });
+      });
+      res.json(data);
+    });
+  });
+  // users score &&& game title
+  app.get("/api/userdata/:userId", function(req, res){
     db.Score.findAll(
       {
-        attributes:["gameScore"],
         where:{
-          userId: req.params.id
+          userId: req.params.userId
         },
         include:[db.Game],
         order:[["gameId", "ASC"]]
       }
     ).then(function(dbScore){
-      // var newArrayofScores =[];
-      // dbScore.forEach(function(item){
-      //   var newObject ={
-      //     gameTitle: item.Game.gameTitle,
-      //     gameScore: item.gameScore
-      //   };
-      //   newArrayofScores.push(newObject);
-      // });
-      res.json(dbScore);
+      var newArrayofScores =[];
+      dbScore.forEach(function(item){
+        var newObject ={
+          gameTitle: item.Game.gameTitle,
+          gameScore: item.gameScore
+        };
+        newArrayofScores.push(newObject);
+      });
+      res.json(newArrayofScores);
     });
-
   });
 
-
+  // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
+  app.post("/api/newscore/", function(req,res){
+    db.Score.findOrCreate({
+      gameScore: req.body.gameScore,
+      gameId:req.body.gameId,
+      userId: req.body.userId
+    }).then(function(dbScore){
+      // true
+      res.json(dbScore);
+    });
+  });
+  // this route will create a new chanllenge requirements challengerId, toBeChallengeId, post, and gameId
+  app.post("/api/newChallenge/",function(req, res){
+    var challenger = req.body.challengerId;
+    var toBeChallenge = req.body.toBeChallengeId;
+    var post = req.body.post;
+    var gameId = req.body.gameId;
+    db.Challenge.create({
+      post: post,
+      challengerId: challenger,
+      ToBeChallengeId: toBeChallenge,
+      gameId: gameId
+    }).then(function(dbChallege){
+      res.json(dbChallege);
+    });
+  });
+  // this route will return active challenges
+  app.get("/api/userdata/challenges/:challengerId", function(req, res){
+    db.Challenge.findAll(
+      {
+        where:{
+          challengerId: req.params.challengerId,
+          active:true
+        },
+        order:[["createdAt", "ASC"]],
+        include:[{
+          model:db.User,
+          as:"ToBeChallenge"
+        },{
+          model:db.User,
+          as:"challenger"
+        }]
+      }
+    ).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          post: item.post,
+          active: item.active,
+          challenger: item.challenger.email.split("@").shift(),
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+        });
+      });
+      res.json(data);
+    });
+  });
+  // this route return all challenges posted from other users.
+  app.get("/api/userdata/toBechallenge/:toBeChallengeId", function(req, res){
+    db.Challenge.findAll(
+      {
+        where:{
+          toBeChallengeIdId: req.params.toBeChallengeId,
+          active:true
+        },
+        order:[["createdAt", "ASC"]],
+        include:[{
+          model:db.User,
+          as:"ToBeChallenge"
+        },{
+          model:db.User,
+          as:"challenger"
+        }]
+      }
+    ).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          post: item.post,
+          active: item.active,
+          challenger: item.challenger.email.split("@").shift(),
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+        });
+      });
+      res.json(data);
+    });
+  });
+  // this route will update challanges from true, which is active, to false. Requirement: an object with post, active , and challengerid.
+  app.put("/api/updateChalleges",function(req, res){
+    var challengeUpdate = {
+      active: req.body.active
+    };
+    db.Challenge.update(challengeUpdate,{
+      where:{
+        challengerId: req.body.challengerId
+      }
+    }).then(function(dbChallege){
+      res.json(dbChallege);
+    });
+  });
+  app.get("/api/leadership", function(req, res){
+    var maxScores = [];
+    db.Score.findAll({
+      limit:5,
+      attributes:["gamescore"],
+      where:{
+        gameId:1
+      },
+      order:[["gamescore", "DESC"]],
+      include:[db.Game,db.User]
+    }).then(function(dbGame1){
+      maxScores.push(dbGame1[0]);
+      
+    });
+  });
 };

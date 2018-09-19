@@ -6,25 +6,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-  <link href="stylesheets/style.css" rel="stylesheet">
+
+  <link href="stylesheets/SiteStyle.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 
 <body>
-  <!-- <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
+  <div class="sidenav movingNav metal  linear">
   </div>
-</nav> -->
-  <div class="container">
+  <div class="sidenavB movingNavB  metal linear">
+  </div>
+
+  <div class="container main">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
+        <h2> <span class="member-name" style="color:aqua"></span></h2>
       </div>
+    </div>
+  </div>
+  <div class="container main">
+    <div class="row">
+      <div class="col-md-12">
+          <input type="checkbox" id="switch" checked>
+          <label for="switch" class="switch-label">Turn </label>
+          
+          <div class="containerCRT" style="height:800px">
+            <iframe src="http://www.playretrogames.com/2379-super-mario-world" class="screen"></iframe>
+            <div class="overlay">AV-3</div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="buttonPadding">
+    <div class="col-md-12" id="buttonPadding">
+    <button class="push--skeuo"><i class="fas fa-home"></i></button>
+    <button class="push--skeuo"><i class="fas fa-users"></i></button>
+    <button class="push--skeuo"><i class="fas fa-trophy"></i></button>
+    <button class="push--skeuo"> <i class="fab fa-github"></i></button>
     </div>
   </div>
 
