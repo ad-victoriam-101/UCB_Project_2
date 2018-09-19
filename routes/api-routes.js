@@ -206,6 +206,7 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
+<<<<<<< HEAD
   app.get("/api/leadership", function(req, res){
     var maxScores = [];
     db.Score.findAll({
@@ -221,4 +222,6 @@ module.exports = function(app) {
       
     });
   });
+=======
+>>>>>>> 4c3c493a66bbb09285968b122dfbb7f37aca3656
 };
