@@ -49,7 +49,9 @@
                 </div>
             </div>
 
+
             <div class="col-md-6 space"><h1>FIGHT DAVID WITH GAMES</h1></div>
+
         </div>
         <div class="row">
 
@@ -59,7 +61,9 @@
 
             </div>
 
+
             <div class="col-md-6 space">DAVIDS SCORES pong:666 maze:420 Breakout ALL Outrun: Ballin</div>
+
         </div>
         <button type="submit" class="btn btn-primary chosen center">Submit</button>
     </div>
@@ -81,8 +85,26 @@
             </div>
         </div>
     </div>
-    
-    
+    <script>
+function runQuery(post,challengerId, toBechallengeId ) {
+
+    $.ajax({
+        url: "/api/newscore/",
+        method: "Post",
+        data: {
+            post:post,
+            challengerId:challengerId,
+            toBechallengeId: toBechallengeId
+        }
+    })
+        .then(function (postChallenge) {
+
+        });
+       
+
+}
+runQuery();
+</script>
 </body>
 
 </html>

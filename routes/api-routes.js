@@ -207,18 +207,13 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
-  // app.get("/api/leadership", function(req, res){
-  //   var maxScores = [];
-  //   db.Score.findAll({
-  //     limit:5,
-  //     attributes:["gamescore"],
-  //     where:{
-  //       gameId:1
-  //     },
-  //     order:[["gamescore", "DESC"]],
-  //     include:[db.Game,db.User]
-  //   }).then(function(dbGame1){
-  //     maxScores.push(dbGame1[0]);
-  //   });
-  // });
+  app.get("/api/users", function(req, res){
+    db.User.findAll({
+      attributes:["email"]
+    }
+    ).then(function(dbUser){
+      res.json(dbUser);
+    });
+  });
+
 };
