@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 space">CHOSEN USERES SCORES BLANK COMPANY LOGO OR TAGERT TILL CHOSEN </div>
+            <div class="col-md-6 space"></div>
         </div>
         <div class="row">
 
@@ -57,7 +57,7 @@
 
             </div>
 
-            <div class="col-md-6 space">CHOSEN USERES SCORES BLANK COMPANY LOGO OR TAGERT TILL CHOSEN </div>
+            <div class="col-md-6 space" > <ul class="h1" id="userChallenges"> <li>Hello</li> </ul> </div>
         </div>
         <button type="submit" class="btn btn-primary chosen center">Submit</button>
     </div>
@@ -79,8 +79,26 @@
             </div>
         </div>
     </div>
-    
-    
+    <script>
+function runQuery(post,challengerId, toBechallengeId ) {
+
+    $.ajax({
+        url: "/api/newscore/",
+        method: "Post",
+        data: {
+            post:post,
+            challengerId:challengerId,
+            toBechallengeId: toBechallengeId
+        }
+    })
+        .then(function (postChallenge) {
+
+        });
+       
+
+}
+runQuery();
+</script>
 </body>
 
 </html>
