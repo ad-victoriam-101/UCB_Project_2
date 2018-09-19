@@ -5,8 +5,8 @@ USE gamelife;
 INSERT INTO games (gameTitle,createdAt,updatedAt) VALUES 
 ("PONG","2018-09-15 23:30:23","2018-09-15 23:30:23"),
 ("MAZE","2018-09-15 23:30:23","2018-09-15 23:30:23"),
-("SNAKE","2018-09-15 23:30:23","2018-09-15 23:30:23"),
-("BUBBLE SHOUTER","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("BREAKOUT","2018-09-15 23:30:23","2018-09-15 23:30:23"),
+("RUNOUT","2018-09-15 23:30:23","2018-09-15 23:30:23"),
 ("GAME 5","2018-09-15 23:30:23","2018-09-15 23:30:23");
 
 Insert into users (email,password,createdAt,updatedAt) VALUES
