@@ -7,6 +7,8 @@
         crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
@@ -38,7 +40,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h2>User Name</h2>
-                <div id=userName>David</div>
+                <div id=userName></div>
             </div>
 
             <div class="col-md-6">
@@ -50,18 +52,12 @@
         <div class="row">
             <div class="col-md-6">
                 <h2>Quote</h2>
-                <div id=userQuote>"boy you just got clucked"</div>
+                <div id=userQuote></div>
             </div>
             <div class="col-md-6">
                 <h2>Top Scores</h2>
                 <div id="topScore">
-                    <ul>
-
-                        <li>Pong:666</li>
-
-                        <li>Maze:.674 Seconds</li>
-
-                    </ul>
+        
                 </div>
             </div>
         </div>
@@ -83,6 +79,60 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <script>
+     $.ajax({
+        url: "/api/user_data",
+        method: "GET"
+    })
+        .then(function (userData) {
+
+            // Here we then log the gamelistData to console, where it will show up as an object.
+        
+            console.log("------------------------------------");
+            var user = $("#userName");
+            user.append(
+                $("<h2>").append(userData.email).addClass("text-light text-center")
+            );
+            var quote = $("#userQuote");
+            quote.append(
+                $("<h2>").append(userData.quote).addClass("text-light text-center")
+            );
+
+
+
+            $.ajax({
+        url: "/api/userdata/" + userData.id,
+        method: "GET"
+    })
+        .then(function (userId) {
+
+            // Here we then log the gamelistId to console, where it will show up as an object.
+            console.log(userId);
+            console.log("------------------------------------");
+            var user = $("#topScore");
+            for (let i = 0; i < 4; i++) {
+             
+                
+           
+            user.append(
+                $("<h2>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light text-center")
+           
+                
+            )}})
+             }
+
+        )
+
+        
+
+    
+    
+    
+    </script>
 </body>
 
 </html>
