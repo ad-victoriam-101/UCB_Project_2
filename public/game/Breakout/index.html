@@ -215,8 +215,11 @@
             dy = -0
           lives = 3
           alert("game over")
-          app.post("/api/newscore/" + count + 2 + 1)
-          draw()
+
+          $.post("/api/newscore/" + count + 3 + 1)
+      draw()
+
+
         }
         drawLives()
         console.log(lives);
