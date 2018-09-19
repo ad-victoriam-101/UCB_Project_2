@@ -1,7 +1,4 @@
 
-/**
- * Settings
- */
 var DIFFICULTY = 1; // from 0 to 1, 1 being hardest
 
 var WIDTH = 500;
