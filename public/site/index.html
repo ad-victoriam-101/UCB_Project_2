@@ -106,101 +106,102 @@
                     </div>
                 </div>
             </div>
-            <div class="row" id="buttonPadding">
-                <div class="col-md-12" id="buttonPadding">
-                    <div class="col-md-3">
-                        <a href="../public/site/index.html"><button class="push--skeuo"><i class="fas fa-home"></i></button></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="../public/site/profile.html"><button class="push--skeuo"><i class="fas fa-users"></i></button></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="../public/site/challenges.html"><button class="push--skeuo"><i class="fas fa-trophy"></i></button></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="https://github.com/ad-victoriam-101/UCB_Project_2/blob/master/README.md"><button class="push--skeuo">
-                                <i class="fab fa-github"></i></button></a>
-                    </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/home"><button class="push--skeuo"><i class="fas fa-home"></i></button></a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/profile"><button class="push--skeuo"><i class="fas fa-users"></i></button></a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/challenges"><button class="push--skeuo"><i class="fas fa-trophy"></i></button></a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://github.com/ad-victoriam-101/UCB_Project_2/blob/master/README.md"><button class="push--skeuo">
+                            <i class="fab fa-github"></i></button></a>
                 </div>
             </div>
+        </div>
             <script>
-function runQuery() {
+                function runQuery() {
 
-    // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-    $.ajax({
-    url: "/api/top_scores/:gameId",
-    method: "GET"
-    }).then(function (gameData) {
+                    // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+                    $.ajax({
+                        url: "/api/top_scores/:gameId",
+                        method: "GET"
+                    }).then(function (gameData) {
 
-    // Here we then log the gamelistData to console, where it will show up as an object.
-    console.log(gameData);
-    console.log("------------------------------------");
-    });
-    $.ajax({
-            url: "/api/top_scores/1",
-            method: "GET"
-        })
-        .then(function (gameData) {
+                        // Here we then log the gamelistData to console, where it will show up as an object.
+                        console.log(gameData);
+                        console.log("------------------------------------");
+                    });
+                    $.ajax({
+                            url: "/api/top_scores/1",
+                            method: "GET"
+                        })
+                        .then(function (gameData) {
 
-            // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
-            var score1 = $("#score1");
-            score1.append(
-                $("<h4>").text(gameData[0].gameTitle + " " + gameData[0].gameScore +
-                    " BY " + gameData[0].user),
-            );
-        })
+                            // Here we then log the gamelistData to console, where it will show up as an object.
+                            console.log(gameData);
+                            console.log("------------------------------------");
+                            var score1 = $("#score1");
+                            score1.append(
+                                $("<h4>").text(gameData[0].gameTitle + " " + gameData[0].gameScore +
+                                    " BY " + gameData[0].user),
+                            );
+                        })
 
-    $.ajax({
-            url: "/api/top_scores/2",
-            method: "GET"
-        })
-        .then(function (gameData) {
+                    $.ajax({
+                            url: "/api/top_scores/2",
+                            method: "GET"
+                        })
+                        .then(function (gameData) {
 
-            // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
-            var score2 = $("#score2");
-            score2.append(
-                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
-                    " BY " + gameData[0].user),
-            );
-        })
+                            // Here we then log the gamelistData to console, where it will show up as an object.
+                            console.log(gameData);
+                            console.log("------------------------------------");
+                            var score2 = $("#score2");
+                            score2.append(
+                                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
+                                    " BY " + gameData[0].user),
+                            );
+                        })
 
-    $.ajax({
-            url: "/api/top_scores/3",
-            method: "GET"
-        })
-        .then(function (gameData) {
+                    $.ajax({
+                            url: "/api/top_scores/3",
+                            method: "GET"
+                        })
+                        .then(function (gameData) {
 
-            // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
-            var score3 = $("#score3");
-            score3.append(
-                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
-                    " BY " + gameData[0].user),
-            );
-        })
+                            // Here we then log the gamelistData to console, where it will show up as an object.
+                            console.log(gameData);
+                            console.log("------------------------------------");
+                            var score3 = $("#score3");
+                            score3.append(
+                                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
+                                    " BY " + gameData[0].user),
+                            );
+                        })
 
-    $.ajax({
-            url: "/api/top_scores/4",
-            method: "GET"
-        })
-        .then(function (gameData) {
+                    $.ajax({
+                            url: "/api/top_scores/4",
+                            method: "GET"
+                        })
+                        .then(function (gameData) {
 
-            // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
-            var score4 = $("#score4");
-            score4.append(
-                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
-                    " BY " + gameData[0].user),
-            );
-        });
-}
-</script>
+                            // Here we then log the gamelistData to console, where it will show up as an object.
+                            console.log(gameData);
+                            console.log("------------------------------------");
+                            var score4 = $("#score4");
+                            score4.append(
+                                $("<h4>").text("|" + gameData[0].gameTitle + " " + gameData[0].gameScore +
+                                    " BY " + gameData[0].user),
+                            );
+                        });
+                }
+            </script>
 </body>
 
 </html>
