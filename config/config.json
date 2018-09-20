@@ -14,7 +14,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "database": "JawSDB_URL",
+    "database": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

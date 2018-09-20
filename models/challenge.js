@@ -32,8 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       as: "ToBeChallenge"
     });
   };
-  //  Challenge.associate = function(models){
-  //    Challenge.belongsTo(models.User,{as:"acceptor"})
-  //  }
+
   return Challenge;
 };
