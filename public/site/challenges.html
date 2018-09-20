@@ -1,17 +1,18 @@
 <!doctype html>
 <html>
-
 <head>
     <title>BOOM!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
 </head>
-
 <body>
     <div class="sidenav metal linear">
     </div>
@@ -21,51 +22,28 @@
             <div class="title .offset-md-6 ">
                 <h1>
                     <pre>
- _____    _____   _____            __     
-/\  _ `\ /\  __`\/\  __`\  /'\_/'\/\ \    
-\ \ \L\\\ \ \/\ \ \ \/\ \/\      \ \ \   
- \ \  _ '\ \ \ \ \ \ \ \ \ \ \__\ \ \ \  
-  \ \ \L\ \\ \ \_\ \ \ \_\ \ \ \_/\ \ \_\ 
-   \ \____/ \ \_____\ \_____\ \_\\ \_\/\_\
-     \/___/   \/_____/\/_____/\/_/ \/_/\/_/ </pre>
+     _____    _____   _____            __     
+    /\  _ `\ /\  __`\/\  __`\  /'\_/'\/\ \    
+    \ \ \L\\\ \ \/\ \ \ \/\ \/\      \ \ \   
+     \ \  _ '\ \ \ \ \ \ \ \ \ \ \__\ \ \ \  
+      \ \ \L\ \\ \ \_\ \ \ \_\ \ \ \_/\ \ \_\ 
+       \ \____/ \ \_____\ \_____\ \_\\ \_\/\_\
+         \/___/   \/_____/\/_____/\/_/ \/_/\/_/   </pre>
             </div>
         </div>
     <div class="container containerCRT">
         <div class="row">
-            <div class="col-md-9">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle chosen" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Who Would You Like To SKEWL?
-                    </a>
-
-                    <h1>david</h1>
-
-                    <h1>David</h1>
-
-                    <h1>ALSO DAVID</h1>
-                       
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6 space"><h1>FIGHT DAVID WITH GAMES</h1></div>
-
-        </div>
-        <div class="row">
-
             <div class="col-md-6 space">
-                <h2>What Is Your Message To Your Target? (will defualt to quote if not filled)</h2>
-                <input class="form-control form-control-lg" type="text" placeholder="You Just Got Clucked ">
-
+                <h1>Who do you want to challenge? </h1>
+                <input class="form-control form-control-lg " type="text" placeholder="David@berkeley.edu " style="padding:4%" id="target">
+                <input class="form-control form-control-lg " type="number" placeholder="3 " style="padding:4%" id="gameId">
+                <h1>What Is Your Message To Your Target? </h1>
+                <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%" id="message">
+                <button type="submit" id="submit" class="btn btn-lg btn-primary chosen center mb-5 mt-3"> <h1 class="h1">Submit</h1></button>
             </div>
-
-
-            <div class="col-md-6 space">DAVIDS SCORES pong:666 maze:420 Breakout ALL Outrun: Ballin</div>
-
+            <div class="col-md-6 space" id="challenges"></div>
         </div>
-        <button type="submit" class="btn btn-primary chosen center">Submit</button>
+       
     </div>
     <div class="container ">
         <div class="row">
@@ -86,25 +64,51 @@
         </div>
     </div>
     <script>
-function runQuery(post,challengerId, toBechallengeId ) {
+        $("#submit").on("click", function(event){
+            event.preventDefault();
+            var target = $("#target").val().trim();
+            var post = $("#message").val().trim();
+           $("#gameId").val("");
+           $("#target").val("");
+           $("#message").val("");
+           $("#gameId").val("");
 
-    // $.ajax({
-    //     url: "/api/newscore/",
-    //     method: "Post",
-    //     data: {
-    //         post:post,
-    //         challengerId:challengerId,
-    //         toBechallengeId: toBechallengeId
-    //     }
-    // })
-    //     .then(function (postChallenge) {
+            console.log(gameId);
+            $.get("/api/user_data", function (user) {
+                $.post("/api/newChallenge/",{
+                    challengerId:user.id,
+                    ToBeChallengeId:target,
+                    post: post,
+                    GameId: gameId
+                }).then(function (data) {
+                    console.log(data);
+                    location.reload("/challenges");
+                });
+            });
 
-    //     });
-       
+        });
+        function getMyChallenges() {
+            $.get("/api/user_data", function (user) {
+                $.get("/api/userdata/challenges/"+ user.id).then(function (data) {
+                  var userChallege = $("#challenges")
+                  for(var i = 0; i < data.length; i++){
+                      userChallege.append("<h1 class='text-light'> "  + data[i].toBeChallenge + " has been challenge by "+data[i].challenger + " </h1> <h1 class='text-light'>Message: " +data[i].post + "</h1> <div class='btn btn-lg btn-dark mt-4'> <p class='h1'> Decline </p> </div>")
+                  }
+                });
+            });
+            $.get("/api/user_data", function (user) {
+               
+                $.get("/api/userdata/toBechallenge/"+ user.id).then(function (data) {
+                  var userChallege = $("#challenges")
+                  for(var i = 0; i < data.length; i++){
+                      userChallege.append("<h1 class='text-light'> "  + data[i].toBeChallenge + " has been challenge by "+data[i].challenger + " </h1> <h1 class='text-light'>Message: " +data[i].post + "</h1> <div class='btn btn-lg btn-dark mt-4'> <p class='h1'> accept </p> </div>")
+                  }
+                });
+            });
+        }
+        getMyChallenges();
 
-}
-runQuery();
-</script>
+    </script>
+    
 </body>
-
 </html>

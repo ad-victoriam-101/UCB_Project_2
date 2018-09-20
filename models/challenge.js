@@ -32,6 +32,5 @@ module.exports = function(sequelize, DataTypes) {
       as: "ToBeChallenge"
     });
   };
-
   return Challenge;
 };

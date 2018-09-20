@@ -2,7 +2,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
-
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -13,7 +12,6 @@ module.exports = function(app) {
     // They won't get this or even be able to access this page if they aren't authed
     res.json("/members");
   });
-
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
@@ -31,13 +29,11 @@ module.exports = function(app) {
       // res.status(422).json(err.errors[0].message);
     });
   });
-
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
-
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
@@ -107,31 +103,28 @@ module.exports = function(app) {
       res.json(newArrayofScores);
     });
   });
-
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
   app.post("/api/newscore/", function(req,res){
-    db.Score.findOrCreate({
-      gameScore: req.body.gameScore,
-      gameId:req.body.gameId,
-      userId: req.body.userId
-    }).then(function(dbScore){
+    console.log(req.body);
+    db.Score.create(req.body).then(function(dbScore){
       // true
       res.json(dbScore);
     });
   });
   // this route will create a new chanllenge requirements challengerId, toBeChallengeId, post, and gameId
   app.post("/api/newChallenge/",function(req, res){
-    var challenger = req.body.challengerId;
-    var toBeChallenge = req.body.toBeChallengeId;
+   
+    var challengerId = req.body.challengerId;
+    var ToBeChallengeId = req.body.ToBeChallengeId;
     var post = req.body.post;
-    var gameId = req.body.gameId;
+    var gameId = req.body.GameId;
     db.Challenge.create({
       post: post,
-      challengerId: challenger,
-      ToBeChallengeId: toBeChallenge,
-      gameId: gameId
+      challengerId: challengerId,
+      ToBeChallengeId: ToBeChallengeId,
+      GameId: gameId
     }).then(function(dbChallege){
-      res.json(dbChallege);
+      res.json(dbChallege)
     });
   });
   // this route will return active challenges
@@ -149,6 +142,9 @@ module.exports = function(app) {
         },{
           model:db.User,
           as:"challenger"
+        },
+        {
+          model:db.Game,
         }]
       }
     ).then(function(dbScore){
@@ -158,7 +154,8 @@ module.exports = function(app) {
           post: item.post,
           active: item.active,
           challenger: item.challenger.email.split("@").shift(),
-          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift(),
+          gameTitle:item.Game.gameTitle
         });
       });
       res.json(data);
@@ -169,7 +166,7 @@ module.exports = function(app) {
     db.Challenge.findAll(
       {
         where:{
-          toBeChallengeIdId: req.params.toBeChallengeId,
+          toBeChallengeId: req.params.toBeChallengeId,
           active:true
         },
         order:[["createdAt", "ASC"]],
@@ -215,5 +212,4 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
-
 };

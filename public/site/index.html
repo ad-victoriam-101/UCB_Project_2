@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +14,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
-
 </head>
-
 <body>
     <div class="sidenav metal  linear">
     </div>
@@ -52,7 +49,6 @@
                     </div>
                     <div class="col-md-3">
                         <div id="score4"></div>
-
                     </div>
                     </div>
                     <div class="row ">
@@ -61,7 +57,6 @@
                                 <h1 class="font-weight-bold">Pong</h1>
                             </a>
                         </div>
-
                         <div class="col-md-3 gme">
                             <a href="/game/maze/index.html">
                                 <h1 class="font-weight-bold">Maze</h1>
@@ -72,7 +67,6 @@
                                 <h1 class="font-weight-bold">Breakout</h1>
                             </a>
                         </div>
-
                         <div class="col-md-3 gme">
                             <a href="/game/OUTRUN/index.html">
                                 <h1 class="font-weight-bold">Outrun (SEGA CLONE)</h1>
@@ -98,68 +92,55 @@
                             <i class="fab fa-github" id="buttonPadding"></i></button></a>
                 </div>
             </div>
-            <script>
+<script>
 function runQuery() {
-
     // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-
     $.ajax({
         url: "/api/top_scores/1",
         method: "GET"
     })
         .then(function (gameData) {
-
             // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
+           
             var score1 = $("#score1");
             score1.append(
                 $("<h2>").append("Best Score  - " + gameData[0].gameScore + "<br>"
                      + gameData[0].user).addClass("text-light text-center")
             );
         })
-
     $.ajax({
         url: "/api/top_scores/2",
         method: "GET"
     })
         .then(function (gameData) {
-
             // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
+            
             var score2 = $("#score2");
             score2.append(
                 $("<h2>").append("Best Score  - " + gameData[0].gameScore + "<br>"
                      + gameData[0].user).addClass("text-light text-center")
             );
         })
-
     $.ajax({
         url: "/api/top_scores/3",
         method: "GET"
     })
         .then(function (gameData) {
-
             // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
+          
             var score3 = $("#score3");
             score3.append(
                 $("<h2>").append("Best Score  - " + gameData[0].gameScore + "<br>"
                      + gameData[0].user).addClass("text-light text-center")
             );
         })
-
     $.ajax({
         url: "/api/top_scores/4",
         method: "GET"
     })
         .then(function (gameData) {
-
             // Here we then log the gamelistData to console, where it will show up as an object.
-            console.log(gameData);
-            console.log("------------------------------------");
+           
             var score4 = $("#score4");
             score4.append(
                 $("<h2>").append("Best Score  - " + gameData[0].gameScore + "<br>"
@@ -170,5 +151,4 @@ function runQuery() {
 runQuery();
 </script>
 </body>
-
 </html>

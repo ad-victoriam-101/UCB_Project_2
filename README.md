@@ -28,11 +28,10 @@ Member’s page – On top will display your email that you signed up with. Foll
 
 •	Third CHALLENGE button, will lead you to challenge your friends.
 
-![Challenge button](./public/images/.png)
+![Challenge button](./public/images/challengePage.png)
 
 
 •	Fourth GITHUB button will send you to Github repository.
-
 
 
 
