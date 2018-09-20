@@ -38,7 +38,6 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Who Would You Like To SKEWL?
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="#">David</a>
                         <a class="dropdown-item" href="#">Issac</a>
@@ -47,7 +46,6 @@
                 </div>
             </div>
 
-            <div class="col-md-6 space"></div>
         </div>
         <div class="row">
 
@@ -82,18 +80,18 @@
     <script>
 function runQuery(post,challengerId, toBechallengeId ) {
 
-    $.ajax({
-        url: "/api/newscore/",
-        method: "Post",
-        data: {
-            post:post,
-            challengerId:challengerId,
-            toBechallengeId: toBechallengeId
-        }
-    })
-        .then(function (postChallenge) {
+    // $.ajax({
+    //     url: "/api/newscore/",
+    //     method: "Post",
+    //     data: {
+    //         post:post,
+    //         challengerId:challengerId,
+    //         toBechallengeId: toBechallengeId
+    //     }
+    // })
+    //     .then(function (postChallenge) {
 
-        });
+    //     });
        
 
 }
