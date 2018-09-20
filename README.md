@@ -34,6 +34,7 @@ Member’s page – On top will display your email that you signed up with. Foll
 •	Fourth GITHUB button will send you to Github repository.
 
 
+
 ## Technologies Used:
 HTML, SCSS, JavaScript, Sequelize, Node, Express Web Server, Eslint, Passport
 
