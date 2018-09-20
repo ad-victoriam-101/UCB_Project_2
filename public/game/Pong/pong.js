@@ -1,11 +1,8 @@
 
-/**
- * Settings
- */
 var DIFFICULTY = 1; // from 0 to 1, 1 being hardest
 
 var WIDTH = 500;
-var HEIGHT = 750;
+var HEIGHT = 650;
 var PADDLEWIDTH = 50;
 var LEFTARROW = 37;
 var RIGHTARROW = 39;
@@ -157,11 +154,16 @@ Player.prototype.render = function (ctx) {
   ctx.fillText(this.score.toString(), 5, HEIGHT - 30);
 };
 
-Player.prototype.update = function (keysDown) {
+Player.prototype.update = function () {
+  console.log(keysDown);
+  
   var value;
   for (var key in keysDown) {
+    console.log("inside for loop");
+    
     value = Number(key);
     if (value === LEFTARROW) {
+      console.log("left ==========================>")
       this.paddle.move(-6, 0);
     } else if (value === RIGHTARROW) {
       this.paddle.move(6, 0);
@@ -260,7 +262,8 @@ Ball.prototype.update = function (playerBottom, playerTop) {
       playerTop.score++;
     }
     if (playerTop.score===10){
-      alert("game Over");
+      alert("Game Over")
+      $.post("/api/newscore/" + playerBottom.score + 1 + 1)
       this.elementDestroyed();
     } else{
       this.reset();
@@ -316,6 +319,7 @@ Ball.prototype.update = function (playerBottom, playerTop) {
  * @param object document
  * @returns HTML5CanvasElement The canvas inside the element for which you supplied the id.
  */
+var keysDown = {};
 function Pong(appendToElementId, window, document) {
 
   var el = document.getElementById(appendToElementId);
@@ -339,7 +343,6 @@ function Pong(appendToElementId, window, document) {
 
   var ball = new Ball();
 
-  var keysDown = {};
 
 
   function render() {
@@ -374,11 +377,11 @@ function Pong(appendToElementId, window, document) {
   var keyupEvent = function (event) {
     delete keysDown[event.keyCode];
   };
-  var elementDestroyed = function (event) {
-    window.removeEventListener("keydown", keydownEvent, false);
-    window.removeEventListener("keyup", keyupEvent, false);
-    window.removeEventListener("DOMNodeRemoved", elementDestroyed, false);
-  };
+  // var elementDestroyed = function (event) {
+  //   window.removeEventListener("keydown", keydownEvent, false);
+  //   window.removeEventListener("keyup", keyupEvent, false);
+  //   window.removeEventListener("DOMNodeRemoved", elementDestroyed, false);
+  // };
 
   window.addEventListener("keydown", keydownEvent);
   window.addEventListener("keyup", keyupEvent);

@@ -19,7 +19,7 @@ text{
 
 h1{
     color:green;
-    font-family: 'VT323', monospace;
+  font-family: 'VT323', monospace;  
 }
 h2{
     color:green;
@@ -113,3 +113,6 @@ th{
     font-family: 'VT323', monospace;
 }
 
+.left35{
+left: 35%;
+}

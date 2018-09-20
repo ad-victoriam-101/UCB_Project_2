@@ -2,6 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -20,7 +21,8 @@ module.exports = function(app) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      quote: req.body.quote
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
@@ -46,16 +48,21 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        quote:req.user.quote
       });
     }
   });
   // this route will be to get all games currently running.
-  //
-  //
-  //
-  //
-  //top scores for any give game id, Top score will be on top for given game.
+  app.get("/api/games", function(req, res){
+    db.Game.findAll({
+      attributes:["gameTitle"]
+    }
+    ).then(function(dbGame){
+      res.json(dbGame);
+    });
+  });
+  //top scores for any give game id returns gamesscore , gametitle and user
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -64,9 +71,18 @@ module.exports = function(app) {
       where:{
         gameId:gameId
       },
-      order:[["gameScore", "DESC"]]
-    }).then(function(dbScores){
-      res.json(dbScores);
+      order:[["gamescore", "DESC"]],
+      include:[db.Game,db.User]
+    }).then(function(dbScore){
+      var data = [];
+      dbScore.forEach(function(item){
+        data.push({
+          gameTitle: item.Game.gameTitle,
+          user: item.User.email.split("@").shift(),
+          gameScore: item.dataValues.gamescore
+        });
+      });
+      res.json(data);
     });
   });
   // users score &&& game title
@@ -93,14 +109,13 @@ module.exports = function(app) {
   });
 
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
-  // update and create
-
   app.post("/api/newscore/", function(req,res){
-    db.Score.create({
+    db.Score.findOrCreate({
       gameScore: req.body.gameScore,
       gameId:req.body.gameId,
       userId: req.body.userId
     }).then(function(dbScore){
+      // true
       res.json(dbScore);
     });
   });
@@ -182,7 +197,6 @@ module.exports = function(app) {
   // this route will update challanges from true, which is active, to false. Requirement: an object with post, active , and challengerid.
   app.put("/api/updateChalleges",function(req, res){
     var challengeUpdate = {
-      post: req.body.post,
       active: req.body.active
     };
     db.Challenge.update(challengeUpdate,{
@@ -193,4 +207,13 @@ module.exports = function(app) {
       res.json(dbChallege);
     });
   });
+  app.get("/api/users", function(req, res){
+    db.User.findAll({
+      attributes:["email"]
+    }
+    ).then(function(dbUser){
+      res.json(dbUser);
+    });
+  });
+
 };
