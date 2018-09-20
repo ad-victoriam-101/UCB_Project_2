@@ -332,6 +332,7 @@ function Pong(appendToElementId, window, document) {
   };
 
   var canvas = document.createElement("canvas");
+  
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   canvas.style.borderRadius = "5px";

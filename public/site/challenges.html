@@ -4,6 +4,9 @@
     <title>BOOM!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
@@ -31,15 +34,13 @@
     <div class="container containerCRT">
         <div class="row">
             <div class="col-md-6 space">
+                <h1>Who do you want to challenge? </h1>
+                <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%">
                 <h1>What Is Your Message To Your Target? </h1>
                 <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%">
-                <button type="submit" class="btn btn-lg btn-primary chosen center mb-5 mt-3"> <h1 class="h1">Submit</h1></button>
+                <button type="submit" id="submit" class="btn btn-lg btn-primary chosen center mb-5 mt-3"> <h1 class="h1">Submit</h1></button>
             </div>
-            <div class="col-md-6 space">
-                <h1 class="text-light"> David Has been challenge by Amica - </h1>
-                <h1 class="text-light">Message: You are Trash at PONG!</h1> 
-                <div class="btn btn-lg btn-dark mt-4"> <p class="h1"> Accept</p> </div>
-            </div>
+            <div class="col-md-6 space" id="challenges"></div>
         </div>
        
     </div>
@@ -61,7 +62,29 @@
             </div>
         </div>
     </div>
-    
+    <script>
+        function getMyChallenges() {
+            $.get("/api/user_data", function (user) {
+                $.get("/api/userdata/challenges/"+ user.id).then(function (data) {
+                  var userChallege = $("#challenges")
+                  for(var i = 0; i < data.length; i++){
+                      userChallege.append("<h1 class='text-light'> "  + data[i].toBeChallenge + " has been challenge by "+data[i].challenger + " </h1> <h1 class='text-light'>Message: " +data[i].post + "</h1> <div class='btn btn-lg btn-dark mt-4'> <p class='h1'> Decline </p> </div>")
+                  }
+                });
+            });
+            $.get("/api/user_data", function (user) {
+                console.log(user.id)
+                $.get("/api/userdata/toBechallenge/"+ user.id).then(function (data) {
+                  var userChallege = $("#challenges")
+                  for(var i = 0; i < data.length; i++){
+                      userChallege.append("<h1 class='text-light'> "  + data[i].toBeChallenge + " has been challenge by "+data[i].challenger + " </h1> <h1 class='text-light'>Message: " +data[i].post + "</h1> <div class='btn btn-lg btn-dark mt-4'> <p class='h1'> accept </p> </div>")
+                  }
+                });
+            });
+        }
+        getMyChallenges();
+
+    </script>
     
 </body>
 </html>

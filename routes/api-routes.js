@@ -141,6 +141,9 @@ module.exports = function(app) {
         },{
           model:db.User,
           as:"challenger"
+        },
+        {
+          model:db.Game,
         }]
       }
     ).then(function(dbScore){
@@ -150,7 +153,8 @@ module.exports = function(app) {
           post: item.post,
           active: item.active,
           challenger: item.challenger.email.split("@").shift(),
-          toBeChallenge: item.ToBeChallenge.email.split("@").shift()
+          toBeChallenge: item.ToBeChallenge.email.split("@").shift(),
+          gameTitle:item.Game.gameTitle
         });
       });
       res.json(data);
@@ -161,7 +165,7 @@ module.exports = function(app) {
     db.Challenge.findAll(
       {
         where:{
-          toBeChallengeIdId: req.params.toBeChallengeId,
+          toBeChallengeId: req.params.toBeChallengeId,
           active:true
         },
         order:[["createdAt", "ASC"]],
