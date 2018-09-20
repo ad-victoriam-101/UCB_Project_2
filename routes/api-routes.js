@@ -55,7 +55,7 @@ module.exports = function(app) {
   //
   //
   //
-  //top scores for any give game id
+  //top scores for any give game id, Top score will be on top for given game.
   app.get("/api/top_scores/:gameId", function(req, res){
     var gameId = req.params.gameId;
     db.Score.findAll({
@@ -93,6 +93,7 @@ module.exports = function(app) {
   });
 
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
+  // update and create
 
   app.post("/api/newscore/", function(req,res){
     db.Score.create({
