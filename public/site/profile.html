@@ -1,27 +1,23 @@
 <!doctype html>
 <html>
-
 <head>
     <title>BOOM!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-
     <link rel="stylesheet" type="text/css" media="screen" href="../../game/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/SiteStyle.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
 </head>
-
 <body>
     <div class="sidenav metal linear">
     </div>
     <div class="sidenavB metal linear">
     </div>
-<div class="container">
+    <div class="container">
         <div class="title .offset-md-6 ">
             <h1>
                 <pre>
@@ -32,7 +28,6 @@
   \ \ \L\ \\ \ \_\ \ \ \_\ \ \ \_/\ \ \_\ 
    \ \____/ \ \_____\ \_____\ \_\\ \_\/\_\
      \/___/   \/_____/\/_____/\/_/ \/_/\/_/   </pre>
-
             </h1>
         </div>
     </div>
@@ -42,13 +37,11 @@
                 <h1>User Name</h1>
                 <div id=userName></div>
             </div>
-
             <div class="col-md-6">
                 <h1> Photo</h1>
                 <div id=userPhoto><img src="../images/download1.jpg" alt="Genius with an ipad"></div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-6">
                 <h1>Quote</h1>
@@ -57,7 +50,6 @@
             <div class="col-md-6">
                 <h1>Top Scores</h1>
                 <div id="topScore">
-        
                 </div>
             </div>
         </div>
@@ -79,99 +71,64 @@
             </div>
         </div>
     </div>
-
-
-
-
     <script>
-function runQuery(){
-
-    $.ajax({
-        url: "/api/user_data",
-        method: "GET"
-    })
-        .then(function (userData) {
-
-            // Here we then log the gamelistData to console, where it will show up as an object.
-
-            console.log("------------------------------------");
-            var user = $("#userName");
-            user.append(
-                $("<h1>").append(userData.email.split("@").shift()).addClass("text-light display-1")
-            );
-            var quote = $("#userQuote");
-            quote.append(
-                $("<h1>").append(userData.quote).addClass("text-light h1")
-            );
-
-
-
-            $.ajax({
-                url: "/api/userdata/" + userData.id,
-                method: "GET"
-            })
-                .then(function (userId) {
-
-                    // Here we then log the gamelistId to console, where it will show up as an object.
-                    console.log(userId);
-                    console.log("------------------------------------");
-                    var user = $("#topScore");
-                    for (let i = 0; i < 4; i++) {
-
-
-
-                        user.append(
-                            $("<h1>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light h1")
-
-
-                        )
-                    }
+    function runQuery() {
+        $.ajax({
+            url: "/api/user_data",
+            method: "GET"
+        })
+            .then(function (userData) {
+                // Here we then log the gamelistData to console, where it will show up as an object.
+                var user = $("#userName");
+                user.append(
+                    $("<h1>").append(userData.email.split("@").shift()).addClass("text-light display-1")
+                );
+                var quote = $("#userQuote");
+                quote.append(
+                    $("<h1>").append(userData.quote).addClass("text-light h1")
+                );
+                $.ajax({
+                    url: "/api/userdata/" + userData.id,
+                    method: "GET"
                 })
-        }
-
-        ).then(function (userData) {
-
-            // Here we then log the gamelistData to console, where it will show up as an object.
-
-            console.log("------------------------------------");
-            var user = $("#userName");
-            user.append(
-                $("<h1>").append(userData.email.split("@").shift()).addClass("text-light display-1")
-            );
-            var quote = $("#userQuote");
-            quote.append(
-                $("<h1>").append(userData.quote).addClass("text-light h1")
-            );
-
-
-
-            $.ajax({
-                url: "/api/userdata/" + userData.id,
-                method: "GET"
-            })
-                .then(function (userId) {
-
-                    // Here we then log the gamelistId to console, where it will show up as an object.
-                    console.log(userId);
-                    console.log("------------------------------------");
-                    var user = $("#topScore");
-                    for (let i = 0; i < 4; i++) {
-
-
-
-                        user.append(
-                            $("<h1>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light h1")
-
-
-                        )
-                    }
+                    .then(function (userId) {
+                        // Here we then log the gamelistId to console, where it will show up as an object.
+                        var user = $("#topScore");
+                        for (let i = 0; i < 4; i++) {
+                            user.append(
+                                $("<h1>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light h1")
+                            )
+                        }
+                    })
+            }
+            ).then(function (userData) {
+                // Here we then log the gamelistData to console, where it will show up as an object.
+                console.log("------------------------------------");
+                var user = $("#userName");
+                user.append(
+                    $("<h1>").append(userData.email.split("@").shift()).addClass("text-light display-1")
+                );
+                var quote = $("#userQuote");
+                quote.append(
+                    $("<h1>").append(userData.quote).addClass("text-light h1")
+                );
+                $.ajax({
+                    url: "/api/userdata/" + userData.id,
+                    method: "GET"
                 })
-        }
-
-        )
-};
-runQuery();
+                    .then(function (userId) {
+                        // Here we then log the gamelistId to console, where it will show up as an object.
+                        console.log(userId);
+                        console.log("------------------------------------");
+                        var user = $("#topScore");
+                        for (let i = 0; i < 4; i++) {
+                            user.append(
+                                $("<h1>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light h1"))
+                        }
+                    })
+            })
+    };
+    runQuery();
     </script>
 </body>
-
 </html>

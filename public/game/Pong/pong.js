@@ -1,6 +1,5 @@
 
 var DIFFICULTY = 1; // from 0 to 1, 1 being hardest
-
 var WIDTH = 500;
 var HEIGHT = 650;
 var PADDLEWIDTH = 50;
@@ -48,7 +47,6 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     ctx.fill();
   }
 }
-
 /**
  * Simple randomization between a min and max.
  * @param {number} min
@@ -58,9 +56,6 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
 function randomOffset(min, max) {
   return (Math.random() * (max - min)) + min;
 }
-
-
-
 /**
  * The paddle which is later attached to player and computer.
  * @param {number} x
@@ -71,7 +66,6 @@ function randomOffset(min, max) {
 function Paddle(x, y) {
   this.width = PADDLEWIDTH;
   this.height = 10;
-
   this.x = x;
   this.y = y;
   this.x_speed = 0;
@@ -102,7 +96,6 @@ Paddle.prototype.move = function (x, y) {
     this.x_speed = 1;
   }
 };
-
 /**
  * The AI user.
  */
@@ -128,17 +121,14 @@ Computer.prototype.update = function (ball) {
   } else if (diff > 0 && diff > 4) {
     diff = 5;
   }
-
   // sets the difficulty, an offset between these two numbers
   this.paddle.move(diff * randomOffset(DIFFICULTY, 1), 0);
-
   if (this.paddle.x < 0) {
     this.paddle.x = 0;
   } else if (this.paddle.x + this.paddle.width > WIDTH) {
     this.paddle.x = WIDTH - this.paddle.width;
   }
 };
-
 /**
  * The human user.
  */
@@ -148,12 +138,10 @@ function Player() {
   var paddleY = HEIGHT - 20;
   this.paddle = new Paddle(paddleX, paddleY);
 }
-
 Player.prototype.render = function (ctx) {
   this.paddle.render(ctx);
   ctx.fillText(this.score.toString(), 5, HEIGHT - 30);
 };
-
 Player.prototype.update = function () {
   console.log(keysDown);
   
@@ -172,7 +160,6 @@ Player.prototype.update = function () {
     }
   }
 };
-
 /**
  * A ball, which handles it's own internal "physics"
  * @param {number} x optional default x position
@@ -184,21 +171,18 @@ Player.prototype.update = function () {
 function Ball(x, y, speedX, speedY, rad) {
   // console.debug('Creating Ball', x, y, speedX, speedY, rad);
   this.radius = rad || 5;
-
   this.default_x_position = function () {
     return typeof x === "undefined" ? WIDTH / 2 : x;
   };
   this.default_y_position = function () {
     return typeof y === "undefined" ? HEIGHT / 2 : y;
   };
-
   this.default_x_speed = function () {
     return typeof speedX === "undefined" ? 0 : speedX;
   };
   this.default_y_speed = function () {
     return typeof speedY === "undefined" ? 3 : speedY;
   };
-
   this.resetSpeed = function () {
     this.x_speed = this.default_x_speed();
     this.y_speed = this.default_y_speed();
@@ -209,15 +193,12 @@ function Ball(x, y, speedX, speedY, rad) {
     this.y = this.default_y_position();
     // console.debug('Resetting Ball position', this.x, this.y);
   };
-
   this.reset = function () {
     this.resetSpeed();
     this.resetPosition();
   };
-
   this.reset();
 }
-
 Ball.prototype.render = function (ctx) {
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
@@ -231,14 +212,12 @@ Ball.prototype.update = function (playerBottom, playerTop) {
   // The speed is applied to the x and y positions of the ball, which moves the ball.
   this.x += this.x_speed;
   this.y += this.y_speed;
-
   var top_x = this.x - this.radius;
   var top_y = this.y - this.radius;
   var bottom_x = this.x + this.radius;
   var bottom_y = this.y + this.radius;
   var paddleBottom = playerBottom.paddle;
   var paddleTop = playerTop.paddle;
-
   // Figures out if the ball direction should change.
   var ballHitLeftWall = this.x - this.radius < 0;
   var ballHitRightWall = this.x + this.radius > WIDTH;
@@ -249,12 +228,10 @@ Ball.prototype.update = function (playerBottom, playerTop) {
     this.x = WIDTH - this.radius;
     this.x_speed = -this.x_speed;
   }
-
   // When somebody scores, reset the ball to the center.
   var bottomScored = this.y < 0;
   var topScored = this.y > HEIGHT;
   if (bottomScored || topScored) {
-
     if (bottomScored) {
       playerBottom.score++;
     }
@@ -262,32 +239,26 @@ Ball.prototype.update = function (playerBottom, playerTop) {
       playerTop.score++;
     }
     if (playerTop.score===10){
+      updateDbScore(playerBottom);
       alert("Game Over")
-      $.post("/api/newscore/" + playerBottom.score + 1 + 1)
-      this.elementDestroyed();
+      this.elementDestroyed(playerBottom.score);
     } else{
       this.reset();
     }
   }
-
   // Determines how much to change the ball speed.
   // When the ball hits a paddle:
   // the ball vertical trajectory reverses and gets set to a randomly but loosely based on the paddle speed,
   // and the horizontal speed increases by half the speed of the paddle.
-
   var ballInBottomOfScreen = top_y > (HEIGHT * 0.75);
   if (ballInBottomOfScreen) {
-
     var bottomPaddleYArea = paddleBottom.y + paddleBottom.height;
     var ballTopIsUnderBottomPaddle = top_y < bottomPaddleYArea;
     var ballBottomIsAboveBottomPaddle = bottom_y > paddleBottom.y;
     var ballYOverlapsBottomPaddle = ballTopIsUnderBottomPaddle && ballBottomIsAboveBottomPaddle;
-
     var bottomPaddleXArea = paddleBottom.x + paddleBottom.width;
     var ballXOverlapsBottomPaddle = top_x < bottomPaddleXArea && bottom_x > paddleBottom.x;
-
     var ballHitBottomPaddle = ballYOverlapsBottomPaddle && ballXOverlapsBottomPaddle;
-
     if (ballHitBottomPaddle) {
       this.y_speed = randomOffset(-(Math.abs(paddleBottom.x_speed || 4)), -0.9 * Math.abs(paddleBottom.x_speed || 4));
       this.x_speed += (paddleBottom.x_speed / 2);
@@ -297,21 +268,15 @@ Ball.prototype.update = function (playerBottom, playerTop) {
     var topPaddleBottom = paddleTop.y + paddleTop.height;
     var ballTopIsOverTopPaddle = top_y < topPaddleBottom;
     var ballBottomIsUnderTopPaddle = bottom_y > paddleTop.y;
-
     var ballXOverlapsTopPaddle = top_x < (paddleTop.x + paddleTop.width) && bottom_x > paddleTop.x;
-
     var ballHitTopPaddle = ballTopIsOverTopPaddle && ballBottomIsUnderTopPaddle && ballXOverlapsTopPaddle;
-
     if (ballHitTopPaddle) {
       this.y_speed = randomOffset(0.9 * Math.abs(paddleTop.x_speed || 3), Math.abs(paddleTop.x_speed || 3));
       this.x_speed += (paddleTop.x_speed / 2);
       this.y += this.y_speed;
     }
   }
-
 };
-
-
 /**
  * Play some pong.
  * @param string appendToElementId The id of the element you want to put pong inside.
@@ -321,56 +286,52 @@ Ball.prototype.update = function (playerBottom, playerTop) {
  */
 var keysDown = {};
 function Pong(appendToElementId, window, document) {
-
   var el = document.getElementById(appendToElementId);
   var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
     window.setTimeout(callback, 1000 / 60);
   };
-
   var canvas = document.createElement("canvas");
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   canvas.style.borderRadius = "5px";
   canvas.style.border = "2px solid " + OFFWHITE;
   canvas.style.backgroundColor = BLACK;
-
   var context = canvas.getContext("2d");
   context.fillStyle = GREEN;
   context.font = "12px sans-serif";
-
   var player = new Player();
   var computer = new Computer();
-
   var ball = new Ball();
-
-
-
   function render() {
     context.fillStyle = BLACK;
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = GREEN;
-
     player.render(context);
     computer.render(context);
     ball.render(context);
   }
-
   function update() {
     player.update(keysDown);
     computer.update(ball);
     ball.update(player, computer);
   }
-
+  function updateDbScore(score){
+    $.get("/api/user_data", function(user){
+      $.post("/api/newscore/",{
+          gameScore:score,GameId:1,UserId:user.id
+      }).then(function(status){
+          console.log(status);
+      })
+    });
+  };
+}
   function step() {
     update();
     render(context);
     animate(step);
   }
-
-
   el.appendChild(canvas);
   animate(step);
-
   var keydownEvent = function (event) {
     keysDown[event.keyCode] = true;
   };
@@ -382,10 +343,8 @@ function Pong(appendToElementId, window, document) {
   //   window.removeEventListener("keyup", keyupEvent, false);
   //   window.removeEventListener("DOMNodeRemoved", elementDestroyed, false);
   // };
-
   window.addEventListener("keydown", keydownEvent);
   window.addEventListener("keyup", keyupEvent);
   window.addEventListener("DOMNodeRemoved", elementDestroyed);
-
   return el;
 }

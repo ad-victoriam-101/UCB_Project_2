@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>BOOM!</title>
@@ -9,7 +8,6 @@
     body {
       background-color: black;
     }
-
     canvas {
       border: 1px solid green;
     }
@@ -22,10 +20,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/SiteStyle.css">
   
 </head>
-
 <body>
-
-
   <div class="title .offset-md-5 ">
       <pre>
                 _____    _____   _____            __     
@@ -40,19 +35,14 @@
     </div>
     <div class="sidenavB metal linear">
     </div>
-
   <div class="container containerCRT">
-
     <h1 id="heading" class="offset-md-4" style="background-color: green; text-decoration-style: solid; color: black; width: 35%; margin-top: 0px;  font-family: 'VT323', monospace; left: 35%;">The
       Aite Pong Clone With Differnt Physics</h1>
     <h1 id="heading" class="offset-md-4" style=" text-decoration-style: solid; color: green; width: 35%; margin-top: 0px; margin-bottom: 10px; font-family: 'VT323', monospace;">PRESS
       SPACE TO PLAY __|__ 3 LIVES TOTAL!!</h3>
-
       <canvas id="game-canvas" class="game offset-md-5" height="600px" width="800px" style="margin-left:auto; margin-right:auto; display: flex;"></canvas>
       </canvas>
-
       <nav class="nav nav-box flex-column flex-sm-row">
-
         <a class="flex-sm-fill text-sm-center nav-link" href="/pong">Pong</a>
         <a class="flex-sm-fill text-sm-center nav-link" href="/maze">Maze</a>
         <a class="flex-sm-fill text-sm-center nav-link chosen" href="/breakout">Breakout</a>
@@ -76,10 +66,8 @@
             </div>
         </div>
     </div>
-
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -93,11 +81,8 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-
     </div>
   </div>
-
-
   <script type="text/javascript">
     var canvas = document.getElementById("game-canvas"),
       ctx = canvas.getContext("2d"),
@@ -119,7 +104,6 @@
       brickPadding = 10,
       brickOffsetTop = 30,
       brickOffsetLeft = 30;
-
     var bricks = [];
     for (c = 0; c < brickCol; c++) {
       for (r = 0; r < brickRows; r++) {
@@ -130,8 +114,6 @@
         });
       }
     }
-
-
     // function to draw the ball 
     function drawBall() {
       ctx.beginPath();
@@ -140,7 +122,6 @@
       ctx.fill();
       ctx.closePath();
     }
-
     // function draw the pong
     function drawPong() {
       ctx.beginPath();
@@ -149,7 +130,6 @@
       ctx.fill();
       ctx.closePath();
     }
-
     // function draw the bricks
     function drawBricks() {
       bricks.forEach(function (brick) {
@@ -162,14 +142,11 @@
       });
     }
     var count = 0;
-
     function collisionDetection() {
       bricks.forEach(function (b) {
         if (!b.status) return;
-
         var inBricksColumn = x > b.x && x < b.x + brickW,
           inBricksRow = y > b.y && y < b.y + brickH;
-
         if (inBricksColumn && inBricksRow) {
           dy = -dy;
           b.status = 0;
@@ -178,34 +155,26 @@
         }
       });
     }
-
     var lives = 3
-
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawBricks();
       drawBall();
       drawPong();
       collisionDetection();
-
-
       function drawLives() {
-
         ctx.beginPath();
         ctx.rect(brick.x, brick.y, brickW, brickH);
         ctx.fillStyle = "green";
         ctx.fill();
         ctx.closePath();
-
       }
-
       if (hitSideWall()) {
         dx = -dx;
       }
       if (hitTop() || hitPong()) {
         dy = -dy;
       }
-
       var data;
       if (death()) {
         reset()
@@ -215,95 +184,71 @@
             dy = -0
           lives = 3
           alert("game over")
-
           $.post("/api/newscore/" + count + 3 + 1)
       draw()
-
-
         }
         drawLives()
         console.log(lives);
         drawPong()
       }
-
       var RIGHT_ARROW = 39,
         LEFT_ARROW = 37,
         space_bar = 32;
-
-
       function hitPong() {
         return hitBottom() && ballOverPong()
       }
-
       function ballOverPong() {
         return x > pongX && x < pongX + pongW
       }
-
       function hitBottom() {
         return y + dy > canvas.height - ballR
       }
-
       function reset() {
         y = canvas.height - 30,
           dy = -dy
         x = pongX + 15
       }
-
       function gameOver() {
         return lives === 0
       }
-
       function start() {
         dx = 3,
           dy = -3
-
       }
-
       function hitSideWall() {
         return x + dx > canvas.width - ballR || x + dx < ballR
       }
-
       function hitTop() {
         return y + dy < ballR
       }
-
       function xOutOfBounds() {
         return x + dx > canvas.width - ballR || x + dx < ballR
       }
-
       function rightPressed(e) {
         return e.keyCode == RIGHT_ARROW
       }
-
       function leftPressed(e) {
         return e.keyCode == LEFT_ARROW
       }
-
       function spacePressed(e) {
         return e.keyCode == space_bar
       }
-
       function death() {
-
         return (hitBottom() && !ballOverPong())
       }
-
       function keyDown(e) {
         rightKey = rightPressed(e);
         leftKey = leftPressed(e);
         spaceKey = spacePressed(e)
       }
-
       function keyUp(e) {
         rightKey = rightPressed(e) ? false : rightKey;
         leftKey = leftPressed(e) ? false : leftKey;
         spaceKey = spacePressed(e) ? false : spaceKey;
       }
-
       // Add an event listener to the keypress event.
       document.addEventListener("keydown", keyDown, false);
       document.addEventListener("keyup", keyUp, false);
-
       // move the pong right if the right key pressed
       var maxX = canvas.width - pongW,
         minX = 0,
@@ -312,13 +257,10 @@
       pongX = pongX + pongDelta;
       pongX = Math.min(pongX, maxX);
       pongX = Math.max(pongX, minX);
-
       x += dx;
       y += dy;
     }
-
     setInterval(draw, 10);
   </script>
 </body>
-
 </html>

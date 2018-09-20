@@ -1,55 +1,51 @@
 
 // Get the modal
 var modal = document.getElementById("myModal");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
 // When the user clicks the button, open the modal
 modelfungo = function() {
   console.log("func called");
   modal.style.display = "block";
   x = document.querySelector(".gamehead");
   x.textContent = "Game Over";
-
 };
-
-
+function updateDbScore(score){
+  $.get("/api/user_data", function(user){
+    $.post("/api/newscore/",{
+      gameScore:score,GameId:2,UserId:user.id
+    }).then(function(status){
+      console.log(status);
+    });
+  });
+}
 modelfunwin = function() {
   console.log("func called");
   modal.style.display = "block";
   x = document.querySelector(".gamehead");
   x.textContent = "Congrats! You Win";
-  $.post("/api/newscore/" + minutes + seconds + 2 + 1)
-
+  updateDbScore(minutes + seconds + 2 + 1);
 };
-
 document.getElementById("demo").addEventListener("click", myFunction);
-
 function myFunction() {
   document.location.reload();
 }
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 };
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 };
-
-
 //var now = new Date().getTime();
 function startTimer(duration, display) {
   var start = Date.now(),
     diff,
     minutes,
     seconds;
-
   function timer() {
     if(playing) {
       diff = duration - (((Date.now() - start) / 1000) | 0);
@@ -58,7 +54,6 @@ function startTimer(duration, display) {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       display.textContent = "Game ends in " + minutes + ":" + seconds;
-
       if (diff <= 0) {
         display.textContent = "Game Over";
         start = Date.now() + 1000;
@@ -70,7 +65,6 @@ function startTimer(duration, display) {
   timer();
   setInterval(timer,1000);
 }
-
 window.onload = function () {
   twominutes = 30;
   x = document.querySelector("#timerel");
@@ -78,7 +72,6 @@ window.onload = function () {
 };
 playing = true;
 window.addEventListener("keydown",doKeyDown,true);
-
 function doKeyDown(evt) {
   var handled = false;
   if (playing) {
@@ -120,26 +113,21 @@ function doKeyDown(evt) {
       playing = false;
     }
     console.log(m.getMoves());
-
   }
   if (handled) {
     evt.preventDefault();
   } // prevent arrow keys from scrolling the page (supported in IE9+ and all other browsers)
 }
-
-
 var dsd = function (size) {
   this.N = size;
   this.P = new Array(this.N);
   this.R = new Array(this.N);
-
   this.init = function () {
     for (var i = 0; i < this.N; i++) {
       this.P[i] = i;
       this.R[i] = 0;
     }
   };
-
   this.union = function (x, y) {
     var u = this.find(x);
     var v = this.find(y);
@@ -151,7 +139,6 @@ var dsd = function (size) {
       this.P[v] = u;
     }
   };
-
   this.find = function (x) {
     if (x == this.P[x]) {
       return x;
@@ -160,14 +147,12 @@ var dsd = function (size) {
     return this.P[x];
   };
 };
-
 function random(min, max) {
   return (min + (Math.random() * (max - min)));
 }
 function randomChoice(choices) {
   return choices[Math.round(random(0, choices.length-1))];
 }
-
 var maze = function (X, Y) {
   this.N = X;
   this.M = Y;
@@ -183,7 +168,6 @@ var maze = function (X, Y) {
       this.Board[i] = new Array(2 * this.M + 1);
       this.vis[i] = new Array(2 * this.M + 1);
     }
-
     for (var i = 0; i < 2 * this.N + 1; i++) {
       for (var j = 0; j < 2 * this.M + 1; j++) {
         if (!(i % 2) && !(j % 2)) {
@@ -199,8 +183,6 @@ var maze = function (X, Y) {
       }
     }
   };
-
-
   this.add_edges = function () {
     for (var i = 0; i < this.N; i++) {
       for (var j = 0; j < this.M; j++) {
@@ -213,8 +195,6 @@ var maze = function (X, Y) {
       }
     }
   };
-
-
   //Hash function
   this.h = function (e) {
     return e[1] * this.M + e[0];
@@ -228,13 +208,11 @@ var maze = function (X, Y) {
     }
     return EL;
   };
-
   this.breakwall = function (e) {
     var x = e[0][0] + e[1][0] + 1;
     var y = e[0][1] + e[1][1] + 1;
     this.Board[x][y] = " ";
   };
-
   this.gen_maze = function () {
     this.EL = this.randomize(this.EL);
     var D = new dsd(this.M * this.M);
@@ -254,7 +232,6 @@ var maze = function (X, Y) {
             this.breakwall(this.EL[i]);
             this.EL[i][2] = 0;
           }
-
         }
         //break;
       } else if (D.find(x) != D.find(y)) {
@@ -265,10 +242,7 @@ var maze = function (X, Y) {
         continue;
       }
     }
-
   };
-
-
   this.draw_canvas = function (id) {
     this.canvas = document.getElementById(id);
     var scale = this.S;
@@ -293,7 +267,6 @@ var maze = function (X, Y) {
       this.ctx.fillRect(scale* x[0], scale * x[1], scale, scale);
     }
   };
-
   this.checkPos = function (id) {
     for (var i = 0; i < 2 * this.N + 1; i++) {
       for (var j = 0; j < 2 * this.M + 1; j++) {
@@ -304,7 +277,6 @@ var maze = function (X, Y) {
       }
     }
   };
-
   this.moveclear = function (a,b) {
     var scale = this.S;
     this.ctx = this.canvas.getContext("2d");
@@ -312,7 +284,6 @@ var maze = function (X, Y) {
     this.ctx.fillRect(scale * a, scale * b, scale, scale);
     this.Board[a][b] = " ";
   };
-
   this.move = function (a,b) {
     var scale = this.S;
     this.ctx = this.canvas.getContext("2d");
@@ -320,7 +291,6 @@ var maze = function (X, Y) {
     this.ctx.fillRect(scale * a, scale * b, scale, scale);
     this.Board[a][b] = "&";
   };
-
   this.moveup = function (id) {
     cord = this.checkPos(id);
     var scale = this.S;
@@ -339,7 +309,6 @@ var maze = function (X, Y) {
       return;
     }
   };
-
   this.movedown = function (id) {
     cord = this.checkPos(id);
     var scale = this.S;
@@ -358,7 +327,6 @@ var maze = function (X, Y) {
       return;
     }
   };
-
   this.moveleft = function (id) {
     cord = this.checkPos(id);
     var scale = this.S;
@@ -377,7 +345,6 @@ var maze = function (X, Y) {
       return;
     }
   };
-
   this.moveright = function (id) {
     cord = this.checkPos(id);
     var scale = this.S;
@@ -410,13 +377,10 @@ var maze = function (X, Y) {
     }
     return 0;
   };
-
   this.getMoves = function () {
     return this.moves;
   };
-
 };
-
 m = new maze(10 , 10);
 m.init();
 m.add_edges();
@@ -427,5 +391,4 @@ function drawMoves() {
 }
 // drawMoves();
 setInterval(drawMoves, 100);
-
 //addEvents();

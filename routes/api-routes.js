@@ -2,7 +2,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
-
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -13,7 +12,6 @@ module.exports = function(app) {
     // They won't get this or even be able to access this page if they aren't authed
     res.json("/members");
   });
-
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
@@ -31,13 +29,11 @@ module.exports = function(app) {
       // res.status(422).json(err.errors[0].message);
     });
   });
-
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
-
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
@@ -107,14 +103,10 @@ module.exports = function(app) {
       res.json(newArrayofScores);
     });
   });
-
   // to add a new game score requirements: an object with gameScore, gameId, and userId as keys. no empty fills
   app.post("/api/newscore/", function(req,res){
-    db.Score.findOrCreate({
-      gameScore: req.body.gameScore,
-      gameId:req.body.gameId,
-      userId: req.body.userId
-    }).then(function(dbScore){
+    console.log(req.body);
+    db.Score.create(req.body).then(function(dbScore){
       // true
       res.json(dbScore);
     });
@@ -215,5 +207,4 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
-
 };
