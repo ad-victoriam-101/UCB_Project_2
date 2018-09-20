@@ -39,23 +39,23 @@
     <div class=" container containerCRT">
         <div class="row">
             <div class="col-md-6">
-                <h2>User Name</h2>
+                <h1>User Name</h1>
                 <div id=userName></div>
             </div>
 
             <div class="col-md-6">
-                <h2> Photo</h2>
+                <h1> Photo</h1>
                 <div id=userPhoto><img src="../images/download1.jpg" alt="Genius with an ipad"></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <h2>Quote</h2>
+                <h1>Quote</h1>
                 <div id=userQuote></div>
             </div>
             <div class="col-md-6">
-                <h2>Top Scores</h2>
+                <h1>Top Scores</h1>
                 <div id="topScore">
         
                 </div>
@@ -95,11 +95,11 @@
             console.log("------------------------------------");
             var user = $("#userName");
             user.append(
-                $("<h2>").append(userData.email).addClass("text-light text-center")
+                $("<h1>").append(userData.email.split("@").shift()).addClass("text-light display-1")
             );
             var quote = $("#userQuote");
             quote.append(
-                $("<h2>").append(userData.quote).addClass("text-light text-center")
+                $("<h1>").append(userData.quote).addClass("text-light h1")
             );
 
 
@@ -119,7 +119,7 @@
                 
            
             user.append(
-                $("<h2>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light text-center")
+                $("<h1>").append(userId[i].gameTitle + " " + userId[i].gameScore).addClass("text-light h1")
            
                 
             )}})
