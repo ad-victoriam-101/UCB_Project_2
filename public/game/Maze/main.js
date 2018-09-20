@@ -5,7 +5,7 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal
 modelfungo = function() {
-  console.log("func called");
+  
   modal.style.display = "block";
   x = document.querySelector(".gamehead");
   x.textContent = "Game Over";
@@ -20,11 +20,10 @@ function updateDbScore(score){
   });
 }
 modelfunwin = function() {
-  console.log("func called");
+
   modal.style.display = "block";
   x = document.querySelector(".gamehead");
   x.textContent = "Congrats! You Win";
-  updateDbScore(minutes + seconds + 2 + 1);
 };
 document.getElementById("demo").addEventListener("click", myFunction);
 function myFunction() {
@@ -112,7 +111,7 @@ function doKeyDown(evt) {
     if (m.checker("canvas")) {
       playing = false;
     }
-    console.log(m.getMoves());
+   
   }
   if (handled) {
     evt.preventDefault();
@@ -370,6 +369,7 @@ var maze = function (X, Y) {
     j = cord[1];
     //    console.log(cord)
     if ((i == 19 && j== 20) || (i==1 && j==0)) {
+      updateDbScore(this.move);
       modelfunwin();
       //           alert("YOU WIN, CONGRATULATIONS!");
       //

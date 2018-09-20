@@ -23,6 +23,15 @@ var BLACK = "#000000";
  * @param {Boolean} fill Whether to fill the rectangle. Defaults to false.
  * @param {Boolean} stroke Whether to stroke the rectangle. Defaults to true.
  */
+function updateDbScore(score){
+  $.get("/api/user_data", function(user){
+    $.post("/api/newscore/",{
+      gameScore:score,GameId:1,UserId:user.id
+    }).then(function(status){
+      console.log(status);
+    });
+  });
+}
 function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   if (typeof stroke === "undefined") {
     stroke = true;
@@ -155,15 +164,11 @@ Player.prototype.render = function (ctx) {
 };
 
 Player.prototype.update = function () {
-  console.log(keysDown);
-  
   var value;
   for (var key in keysDown) {
-    console.log("inside for loop");
     
     value = Number(key);
     if (value === LEFTARROW) {
-      console.log("left ==========================>")
       this.paddle.move(-6, 0);
     } else if (value === RIGHTARROW) {
       this.paddle.move(6, 0);
@@ -262,9 +267,8 @@ Ball.prototype.update = function (playerBottom, playerTop) {
       playerTop.score++;
     }
     if (playerTop.score===10){
-      updateDbScore(playerBottom);
-      alert("Game Over")
-      this.elementDestroyed(playerBottom.score);
+      updateDbScore(playerBottom.score);
+      this.elementDestroyed();
     } else{
       this.reset();
     }
@@ -360,17 +364,9 @@ function Pong(appendToElementId, window, document) {
     computer.update(ball);
     ball.update(player, computer);
   }
-  function updateDbScore(score){
-    $.get("/api/user_data", function(user){
-      $.post("/api/newscore/",{
-          gameScore:score,GameId:1,UserId:user.id
-      }).then(function(status){
-          console.log(status);
-      })
-    });
-  };
+ 
 
-}
+
   function step() {
     update();
     render(context);
@@ -387,15 +383,15 @@ function Pong(appendToElementId, window, document) {
   var keyupEvent = function (event) {
     delete keysDown[event.keyCode];
   };
-  // var elementDestroyed = function (event) {
-  //   window.removeEventListener("keydown", keydownEvent, false);
-  //   window.removeEventListener("keyup", keyupEvent, false);
-  //   window.removeEventListener("DOMNodeRemoved", elementDestroyed, false);
-  // };
+  var elementDestroyed = function () {
+    window.removeEventListener("keydown", keydownEvent, false);
+    window.removeEventListener("keyup", keyupEvent, false);
+    window.removeEventListener("DOMNodeRemoved", elementDestroyed, false);
+  };
 
   window.addEventListener("keydown", keydownEvent);
   window.addEventListener("keyup", keyupEvent);
   window.addEventListener("DOMNodeRemoved", elementDestroyed);
 
   return el;
-
+}
