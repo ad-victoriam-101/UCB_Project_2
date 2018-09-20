@@ -35,9 +35,10 @@
         <div class="row">
             <div class="col-md-6 space">
                 <h1>Who do you want to challenge? </h1>
-                <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%">
+                <input class="form-control form-control-lg " type="text" placeholder="David@berkeley.edu " style="padding:4%" id="target">
+                <input class="form-control form-control-lg " type="number" placeholder="3 " style="padding:4%" id="gameId">
                 <h1>What Is Your Message To Your Target? </h1>
-                <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%">
+                <input class="form-control form-control-lg " type="text" placeholder="You Just Got Clucked " style="padding:4%" id="message">
                 <button type="submit" id="submit" class="btn btn-lg btn-primary chosen center mb-5 mt-3"> <h1 class="h1">Submit</h1></button>
             </div>
             <div class="col-md-6 space" id="challenges"></div>
@@ -63,6 +64,29 @@
         </div>
     </div>
     <script>
+        $("#submit").on("click", function(event){
+            event.preventDefault();
+            var target = $("#target").val().trim();
+            var post = $("#message").val().trim();
+           $("#gameId").val("");
+           $("#target").val("");
+           $("#message").val("");
+           $("#gameId").val("");
+
+            console.log(gameId);
+            $.get("/api/user_data", function (user) {
+                $.post("/api/newChallenge/",{
+                    challengerId:user.id,
+                    ToBeChallengeId:target,
+                    post: post,
+                    GameId: gameId
+                }).then(function (data) {
+                    console.log(data);
+                    location.reload("/challenges");
+                });
+            });
+
+        });
         function getMyChallenges() {
             $.get("/api/user_data", function (user) {
                 $.get("/api/userdata/challenges/"+ user.id).then(function (data) {
@@ -73,7 +97,7 @@
                 });
             });
             $.get("/api/user_data", function (user) {
-                console.log(user.id)
+               
                 $.get("/api/userdata/toBechallenge/"+ user.id).then(function (data) {
                   var userChallege = $("#challenges")
                   for(var i = 0; i < data.length; i++){

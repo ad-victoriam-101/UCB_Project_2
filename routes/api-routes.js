@@ -113,17 +113,18 @@ module.exports = function(app) {
   });
   // this route will create a new chanllenge requirements challengerId, toBeChallengeId, post, and gameId
   app.post("/api/newChallenge/",function(req, res){
-    var challenger = req.body.challengerId;
-    var toBeChallenge = req.body.toBeChallengeId;
+   
+    var challengerId = req.body.challengerId;
+    var ToBeChallengeId = req.body.ToBeChallengeId;
     var post = req.body.post;
-    var gameId = req.body.gameId;
+    var gameId = req.body.GameId;
     db.Challenge.create({
       post: post,
-      challengerId: challenger,
-      ToBeChallengeId: toBeChallenge,
-      gameId: gameId
+      challengerId: challengerId,
+      ToBeChallengeId: ToBeChallengeId,
+      GameId: gameId
     }).then(function(dbChallege){
-      res.json(dbChallege);
+      res.json(dbChallege)
     });
   });
   // this route will return active challenges
