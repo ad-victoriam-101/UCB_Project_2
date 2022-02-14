@@ -2,6 +2,8 @@
 
 ## The Comprehensive game site for web developers.<br>
 
+
+
 ## Motivation and Description: 
 <p> Asked as a group to create a website utilizing API calls, Node, Express Web server, Sequelize where we can have GET and POST routes for retrieving and adding new data. The authors each had ideas of sites they would like to build. Unable to immediately come to a consensus, the idea we all had agreement to make a comprehensive game site for Web Developers with many features.</p>
 
